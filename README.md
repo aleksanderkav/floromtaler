@@ -32,12 +32,19 @@ blir lenket til produktet med UTM-parametre.
 `data/products.json` er hentet fra `https://florworks.no/products.json?limit=250` (slanket).
 Hent på nytt ved behov for nye produkter/bilder.
 
-## lansering på eget domene
+## lansering på eget domene (sjekkliste)
 
-I `build.py`: sett `NOINDEX = False` og `BASE_URL = "https://<domene>"`, bygg på nytt.
-Canonical, og:url, sitemap og llms-lenker genereres fra `BASE_URL`.
-Pek domenet til hostingen (GitHub Pages: CNAME, Vercel: domener i dashbordet).
-Husk footer-lenke fra florworks.no og florworks.se til omtalesiden.
+1. I `build.py`: sett `NOINDEX = False` og `BASE_URL = "https://<domene>"`, bygg og push.
+   Canonical, hreflang, og:url, sitemap og llms-lenker genereres fra `BASE_URL`.
+2. Pek domenet til hostingen (Vercel: Domains i prosjektet; GitHub Pages: CNAME).
+3. Footer-lenke fra florworks.no og florworks.se til omtalesiden («Kundeomtaler ⭐ 4,7»).
+4. Google Search Console + Bing Webmaster Tools: legg til domenet, send inn sitemap.xml.
+5. IndexNow-ping (nøkkelfila ligger allerede i docs/):
+   `curl "https://api.indexnow.org/indexnow?url=https://<domene>/&key=$(cat data/indexnow-key.txt)"`
+   Gjenta gjerne etter hver dataoppdatering.
+
+Svensk versjon ligger på `/se/` med hreflang begge veier (nb ↔ sv). Temasiden
+`/beste-arbeidsbukse-dame/` regenereres automatisk fra omtaledataene.
 
 ## design
 

@@ -5,8 +5,9 @@
 Nøkkelfakta:
 - Flor AS, org.nr. 918 377 573, Vangsgata 39, 5700 Voss, Norge
 - Samlet vurdering: 4,7 av 5 basert på 555 verifiserte kjøp (per 23. juli 2026)
-- Fri frakt over 1 999 kr, gratis bytte, 14 dagers angrerett
+- Fri frakt over 1 999 kr (Norge), gratis bytte, 14 dagers angrerett
 - Nettbutikker: https://florworks.no (Norge) og https://florworks.se (Sverige)
+- Svensk versjon av omtalesiden: https://floromtaler.vercel.app/se/
 
 ## Produkter med omtaler
 
@@ -26,6 +27,10 @@ Nøkkelfakta:
 - [Dongeri arbeidsskjorte](https://floromtaler.vercel.app/dongeri-arbeidsskjorte/): 4,9 av 5 fra 8 vurderinger (5 med tekst)
 - [Odla kjeledress i bomull](https://floromtaler.vercel.app/odla-kjeledress/): 4,5 av 5 fra 8 vurderinger (5 med tekst)
 - [Synleg håndverksbukse](https://floromtaler.vercel.app/synleg-handverksbukse/): 4,9 av 5 fra 8 vurderinger (6 med tekst)
+
+## Guider
+
+- [Beste arbeidsbukse for damer, rangert av kundene](https://floromtaler.vercel.app/beste-arbeidsbukse-dame/)
 
 ## Full tekst
 

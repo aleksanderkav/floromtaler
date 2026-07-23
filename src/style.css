@@ -59,6 +59,9 @@ button { font-family: 'Jost', sans-serif; }
   padding: 14px clamp(16px, 4vw, 48px);
 }
 .logo img { display: block; width: 110px; height: auto; }
+.header-right { display: flex; align-items: center; gap: 18px; }
+.lang-link { color: rgba(255,255,255,.85); font-size: 14px; text-decoration: none; letter-spacing: 0.04em; }
+.lang-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
 /* knapper */
 .btn {
@@ -332,6 +335,40 @@ span.card-product { color: var(--dark); }
   color: var(--mauve);
 }
 .pcard:hover .p-cta { color: var(--mauve-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+/* temaside: rangert liste */
+.hero-single { grid-template-columns: 1fr; }
+.rank-list { display: grid; gap: 18px; }
+.rank-item {
+  display: grid;
+  grid-template-columns: 44px 180px 1fr;
+  gap: 20px;
+  align-items: start;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px;
+}
+.rank-nr {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  color: var(--mauve);
+  line-height: 1;
+}
+.rank-img img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3px; width: 100%; }
+.rank-main h3 { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 20px; margin-bottom: 8px; }
+.rank-main h3 a { color: var(--text); text-decoration: none; }
+.rank-main h3 a:hover { color: var(--mauve-dark); }
+.rank-rating { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; color: var(--dark); margin-bottom: 12px; }
+.rank-quote { font-size: 15px; color: var(--dark); border-left: 3px solid var(--mauve-light); padding-left: 12px; margin-bottom: 14px; }
+.rank-quote cite { display: block; font-style: normal; font-size: 13px; margin-top: 4px; }
+.rank-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.rank-links .btn { padding: 9px 16px; font-size: 13px; }
+@media (max-width: 700px) {
+  .rank-item { grid-template-columns: 32px 1fr; }
+  .rank-img { grid-column: 2; max-width: 200px; }
+  .rank-main { grid-column: 1 / -1; }
+}
 
 /* produktside */
 .crumbs { font-size: 14px; color: var(--dark); margin-bottom: 14px; }
