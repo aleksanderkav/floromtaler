@@ -1,0 +1,485 @@
+[
+ {
+  "title": "Flor Redesign - Forkle",
+  "handle": "flor-redesign-barneforklede",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Barneforkle2.jpg?v=1777549228",
+  "price": "399.00",
+  "type": "Forkle"
+ },
+ {
+  "title": "Sjodna arbeidsbukse Outlet",
+  "handle": "sjodna-arbeidsbukse-outlet",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Sjodnaarbeidsbukse13.jpg?v=1783533323",
+  "price": "474.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Lett ull t-skjorte",
+  "handle": "2026-lett-ull-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Lett_ull_t-skjorte.jpg?v=1779984187",
+  "price": "799.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Cargobukse i bomull",
+  "handle": "2026-cargobukse-i-bomull",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Cargobukse_bomull117.jpg?v=1779880869",
+  "price": "1349.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Odla kjeledress i bomull",
+  "handle": "2026-odla-kjeledress",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Odla_kjeledress_bomull6.jpg?v=1779969762",
+  "price": "1899.00",
+  "type": "Kjeledress"
+ },
+ {
+  "title": "Sørvest bomullsjakke",
+  "handle": "2026-sorvest-jakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Sorvest_bomullsjakke_1214.jpg?v=1779447986",
+  "price": "1499.00",
+  "type": "Jakke"
+ },
+ {
+  "title": "Flor kjeledress Outlet",
+  "handle": "flor-kjeledress-outlet",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_kjeledress_Outlet_1600_2000_px4.jpg?v=1777541972",
+  "price": "1399.00",
+  "type": "Kjeledress"
+ },
+ {
+  "title": "Våronn arbeidsbukse Outlet",
+  "handle": "varonn-arbeidsbukse-outlet",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Varonn_Outlet7.jpg?v=1777278334",
+  "price": "815.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Nøkkelring",
+  "handle": "nokkelring",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Nokkelring3.jpg?v=1777278692",
+  "price": "49.00",
+  "type": "Nøkkelring"
+ },
+ {
+  "title": "Symre duftlys - Skog",
+  "handle": "symre-duftlys-skog",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_Skog_duftlys.jpg?v=1777280099",
+  "price": "200.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Ullhals",
+  "handle": "2025-inst-arbeidsull-hals",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Ullhals.jpg?v=1776950369",
+  "price": "399.00",
+  "type": "Hals"
+ },
+ {
+  "title": "Lue i merinoull",
+  "handle": "2025-inst-arbeidsull-hue",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Ullhue.jpg?v=1777021203",
+  "price": "449.00",
+  "type": "Lue"
+ },
+ {
+  "title": "Ullpanneband",
+  "handle": "2025-inst-arbeidsull-panneband",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Ullpanneband.jpg?v=1777021483",
+  "price": "399.00",
+  "type": "Pannebånd"
+ },
+ {
+  "title": "Ullstillongs",
+  "handle": "2025-inst-arbeidsull-stillongs",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Inst-Arbeidsull-Stillongs9.jpg?v=1777275181",
+  "price": "949.00",
+  "type": "Stillongs"
+ },
+ {
+  "title": "Ulltrøye med høy hals - 100% merinoull",
+  "handle": "2025-inst-arbeidsull-troye-med-hoy-hals",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Ulltroye_med_hog_hals3.jpg?v=1777275735",
+  "price": "1149.00",
+  "type": "Ulltrøye"
+ },
+ {
+  "title": "Ulltrøye med rund hals - 100% merinoull",
+  "handle": "2025-inst-arbeidsull-troye-med-rund-hals",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Inst-Arbeidsull-Rund-Hals3.jpg?v=1777276099",
+  "price": "1049.00",
+  "type": "Ulltrøye"
+ },
+ {
+  "title": "Ullfleece",
+  "handle": "2025-udla-fleecejakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Udla_fleecejakke7.jpg?v=1777541832",
+  "price": "1369.00",
+  "type": "Wool"
+ },
+ {
+  "title": "Flor hettejakke",
+  "handle": "2025-flor-hettejakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Florhettejakke3.jpg?v=1777538654",
+  "price": "799.00",
+  "type": "Jakke"
+ },
+ {
+  "title": "Flor bomullsgenser",
+  "handle": "2025-flor-bomullsgenser",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_bomullsgenser.jpg?v=1777539231",
+  "price": "699.00",
+  "type": "Genser"
+ },
+ {
+  "title": "Skog flanellskjorte",
+  "handle": "2025-skog-flanellskjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Skog_flanellskjorte8.jpg?v=1777540255",
+  "price": "1259.00",
+  "type": "Skjorte"
+ },
+ {
+  "title": "Snedden tights",
+  "handle": "2025-snedden-tights",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Snedden_arbeidstights3.jpg?v=1777540437",
+  "price": "1049.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Enkel t-skjorte",
+  "handle": "2025-enkel-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Enkel_t-skjorte6.jpg?v=1777546715",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "God snekkerbukse",
+  "handle": "2024-god-snekkerbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/God_snekkerbukse175.jpg?v=1782373265",
+  "price": "1799.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Fjellbit såpe",
+  "handle": "fjellbit-sape",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Fjellbit_saper4.jpg?v=1777277046",
+  "price": "155.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Hairtex skaut / fjøslue",
+  "handle": "hairtex-skaut",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hairtexskaut3.jpg?v=1777280548",
+  "price": "600.00",
+  "type": "Hodeplagg"
+ },
+ {
+  "title": "Goabadne arbeidsbody",
+  "handle": "2025-goabadne-arbeidsbody",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Goabadne_arbeidsbody2.jpg?v=1777541623",
+  "price": "220.00",
+  "type": "Body"
+ },
+ {
+  "title": "Godt jobba t-skjorte - herre",
+  "handle": "2025-godt-jobba-t-skjorte-herre",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Godt_jobba_T-skjorte_HERRE3.jpg?v=1777544030",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Bonde t-skjorte herre",
+  "handle": "bonde-t-skjorte-herre",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Bonde_t-skjorte_Herre3.jpg?v=1777547348",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Vår bomullsgenser",
+  "handle": "2025-var-bomullsgenser",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Var_bomullsgenser3.jpg?v=1777548282",
+  "price": "499.00",
+  "type": "Genser"
+ },
+ {
+  "title": "Godt jobba t-skjorte",
+  "handle": "2025-godt-jobba-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Godt_jobba_t-skjorte_Dame.jpg?v=1777544321",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Hage t-skjorte",
+  "handle": "2025-hage-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hage_t-skjorte3.jpg?v=1777546968",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Bonde t-skjorte - dame",
+  "handle": "2025-bonde-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Bondet-skjorte-Dame6.jpg?v=1776952046",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Flor logo t-skjorte",
+  "handle": "flor-logo-t-skjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Florlogot-skjorte.jpg?v=1776952172",
+  "price": "399.00",
+  "type": "T-skjorte"
+ },
+ {
+  "title": "Solskin arbeidsshorts",
+  "handle": "2025-solskin-arbeidsshorts",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Solskin_shorts13.jpg?v=1777552032",
+  "price": "949.00",
+  "type": "Shorts"
+ },
+ {
+  "title": "Sør vest",
+  "handle": "2025-sor-vest",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Sor_vest4_64b63e73-58e2-44cb-acfb-9772606f61c3.jpg?v=1777552652",
+  "price": "1349.00",
+  "type": "Vest"
+ },
+ {
+  "title": "Dongeri arbeidsskjorte",
+  "handle": "2025-dongeri-arbeidsskjorte",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Dongeri_arbeidsskjorte19.jpg?v=1782207546",
+  "price": "999.00",
+  "type": "Skjorte"
+ },
+ {
+  "title": "Hage arbeidskjole",
+  "handle": "2025-hage-arbeidskjole",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hage_Arbeidskjole3.jpg?v=1777543538",
+  "price": "599.00",
+  "type": "Kjole"
+ },
+ {
+  "title": "Vår skrytesokk 2-pk",
+  "handle": "2025-var-skrytesokk-2pk",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Var_skrytesokk3.jpg?v=1777465353",
+  "price": "209.00",
+  "type": "Sokker"
+ },
+ {
+  "title": "Symre hudkrem naturell",
+  "handle": "symre-hudkrem-naturell",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_hudkrem_naturell2.jpg?v=1777280658",
+  "price": "340.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Symre håndkrem 30 ml",
+  "handle": "symre-handkrem-30-ml",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_handkrem_med_furunalolje.jpg?v=1777280712",
+  "price": "199.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Symre leppepomade",
+  "handle": "symre-leppepomade",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_leppepomade.jpg?v=1777280761",
+  "price": "120.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Symre ansiktskrem med ringblomst og lavendel",
+  "handle": "symre-ansiktskrem-med-ringblomst-og-lavendel",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_ansiktskrem_med_lavendel.jpg?v=1777280831",
+  "price": "370.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Symre solkrem 30 ml",
+  "handle": "symre-solkrem-30-ml",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Symre_Solkrem2.jpg?v=1777280879",
+  "price": "349.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Fjåk sjokolade",
+  "handle": "fjak-sjokolade",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Fjaksjokolade4.jpg?v=1777281263",
+  "price": "120.00",
+  "type": "Sjokolade"
+ },
+ {
+  "title": "Arbeidskniv fra Øyo",
+  "handle": "arbeidskniv-fra-oyo",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Oyo_arbeidskniv3.jpg?v=1777553359",
+  "price": "99.00",
+  "type": "Tilbehør"
+ },
+ {
+  "title": "Flor kopp",
+  "handle": "flor-kopp",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_kopp.jpg?v=1777901455",
+  "price": "449.00",
+  "type": "Kopp"
+ },
+ {
+  "title": "Flor Redesign - Jåletaske",
+  "handle": "flor-redesign-toalettmappe",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Jaletaske3.jpg?v=1777540931",
+  "price": "349.00",
+  "type": "Taske"
+ },
+ {
+  "title": "Flor Redesign - Multitaske",
+  "handle": "flor-redesign-multitaske",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Multitaske.jpg?v=1777548980",
+  "price": "299.00",
+  "type": "Taske"
+ },
+ {
+  "title": "Flor Redesign - Hagetaske",
+  "handle": "flor-redesign-hageveske",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hagetaske.jpg?v=1777549479",
+  "price": "399.00",
+  "type": "Taske"
+ },
+ {
+  "title": "Flor plaster",
+  "handle": "flor-plaster",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_plaster2.jpg?v=1777553065",
+  "price": "49.00",
+  "type": ""
+ },
+ {
+  "title": "Flor barnedress",
+  "handle": "flor-barnedress",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_barnedress_18.jpg?v=1777838923",
+  "price": "999.00",
+  "type": "Kjeledress"
+ },
+ {
+  "title": "God arbeidsbukse",
+  "handle": "2024-god-arbeidsbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/God_arbeidsbukse14.jpg?v=1777872722",
+  "price": "749.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Smågodt skål",
+  "handle": "smagodt-skal",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Smagodt_skal5.jpg?v=1777838437",
+  "price": "479.00",
+  "type": "Skål"
+ },
+ {
+  "title": "Hage arbeidsskjorte",
+  "handle": "2024-hage-arbeidsskjorte-1",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hage_arbeidsskjorte6.jpg?v=1777884830",
+  "price": "349.00",
+  "type": "Skjorte"
+ },
+ {
+  "title": "Slåttonn arbeidsshorts",
+  "handle": "2024-slattonn-arbeidsshorts",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Slattonn_arbeidsshorts18.jpg?v=1779443449",
+  "price": "949.00",
+  "type": "Shorts"
+ },
+ {
+  "title": "Hage forkle - kort modell",
+  "handle": "hage-forkle-kort",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hage_forkle_-_kort_modell.jpg?v=1777839419",
+  "price": "529.00",
+  "type": "Forkle"
+ },
+ {
+  "title": "Hage forkle - lang modell",
+  "handle": "2024-florkle-forkle",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Hage_forkle_-_Lang_modell11.jpg?v=1777903686",
+  "price": "729.00",
+  "type": "Forkle"
+ },
+ {
+  "title": "Våronn arbeidsbukse",
+  "handle": "varonn-arbeidsbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Varonn_arbeidsbukse.jpg?v=1777895550",
+  "price": "1629.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Sjodna jakke",
+  "handle": "sjodna-jakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Sjodna_jakke7.jpg?v=1777897858",
+  "price": "199.00",
+  "type": "Jakke"
+ },
+ {
+  "title": "Nær mellomlagsjakke",
+  "handle": "naer-mellomlagsjakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Naermellomlagsjakke4.jpg?v=1777900764",
+  "price": "599.00",
+  "type": "Jakke"
+ },
+ {
+  "title": "Sjodna arbeidsbukse",
+  "handle": "sjodna-arbeidsbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Sjodna_arbeidsbukse6.jpg?v=1777902313",
+  "price": "1579.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Synleg arbeidsshorts",
+  "handle": "synleg-arbeidsshorts",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Synleg_arbeidsshorts3.jpg?v=1777887473",
+  "price": "299.00",
+  "type": "Shorts"
+ },
+ {
+  "title": "Synleg håndverksbukse",
+  "handle": "synleg-handverksbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Synleg-handverksbukse4.jpg?v=1777888036",
+  "price": "499.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Fiks skalljakke",
+  "handle": "fiks-skalljakke",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Fiks_skaljakke11.jpg?v=1777889420",
+  "price": "2199.00",
+  "type": "Jakke"
+ },
+ {
+  "title": "Fiks håndverksbukse",
+  "handle": "fiks-handverksbukse",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Fiks_handverksbukse.jpg?v=1777888800",
+  "price": "1899.00",
+  "type": "Bukser"
+ },
+ {
+  "title": "Flor gavekort - den perfekte gaven!",
+  "handle": "flor-gavekort-den-perfekte-gaven",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Gavekort2.jpg?v=1777896235",
+  "price": "250.00",
+  "type": "Gift Cards"
+ },
+ {
+  "title": "Flor kjeledress",
+  "handle": "ny-flor-kjeledress",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor-Kjeledress17.jpg?v=1777899239",
+  "price": "1999.00",
+  "type": "Kjeledress"
+ },
+ {
+  "title": "Flor handlenett",
+  "handle": "flor-handlenett",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Flor_Handlenett5.jpg?v=1777899641",
+  "price": "189.00",
+  "type": ""
+ },
+ {
+  "title": "Ullsokk med skryt, 2-pk",
+  "handle": "ullsokk-med-skryt-2-pk",
+  "image": "https://cdn.shopify.com/s/files/1/0563/3500/7881/files/Inst_Skrytesokk.jpg?v=1777901907",
+  "price": "369.00",
+  "type": "Sokker"
+ }
+]
