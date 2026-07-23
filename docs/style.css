@@ -226,3 +226,24 @@ details p { margin-top: 10px; color: var(--dark); }
 .site-footer a { color: #fff; }
 .site-footer p { max-width: 640px; margin: 0 auto 14px; }
 .site-footer .updated { font-size: 13px; color: #9a948e; margin-top: 10px; }
+
+/* svar fra butikken */
+.card-reply {
+  background: var(--beige);
+  border-left: 3px solid var(--mauve);
+  border-radius: 3px;
+  padding: 12px 14px;
+  font-size: 15px;
+}
+.card-reply .reply-label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mauve);
+  margin-bottom: 4px;
+}
+
+/* vis flere */
+.mer-wrap { text-align: center; margin-top: 28px; }
+.mer-wrap .btn { cursor: pointer; border: none; font-size: 15px; }
