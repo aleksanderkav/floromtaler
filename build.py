@@ -155,6 +155,10 @@ def stars_svg(rating, size=18, label=True):
             f'<g clip-path="inset(0 {100 - pct:.1f}% 0 0)"><use href="#strow" fill="#A57D85"/></g></svg></span>')
 
 
+CHECK_SVG = ('<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">'
+             '<path fill="currentColor" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.6 6-4.2 4.6a.9.9 0 0 1-1.3 0L4.4 8.8a.8.8 0 0 1 1.2-1.1l1.2 1.2 3.6-4a.8.8 0 1 1 1.2 1.1z"/></svg>')
+
+
 def review_card(r, by_handle, by_title, featured=False, hidden=False):
     d = fmt_date(r["date"])
     prod_html = ""
@@ -174,13 +178,34 @@ def review_card(r, by_handle, by_title, featured=False, hidden=False):
     if hidden:
         cls += " batch-hidden"
     return (f'<article class="{cls}" data-rating="{int(round(r["rating"]))}" data-search="{esc(search)}">'
-            f'{stars_svg(r["rating"], 16)}'
+            f'<div class="card-top">{stars_svg(r["rating"], 15)}{f"<time>{d}</time>" if d else ""}</div>'
             f'<p class="card-text">{esc(r["text"])}</p>'
             f'{reply_html}'
-            f'<footer class="card-meta"><span class="card-name">{esc(r["name"])}</span>'
-            f'{f"<time>{d}</time>" if d else ""}{prod_html}'
-            f'<span class="verified" title="Samlet inn via Lipscore fra verifisert kjøp">Verifisert kjøp</span>'
+            f'<footer class="card-foot">'
+            f'<div class="card-who"><span class="card-name">{esc(r["name"])}</span>'
+            f'<span class="verified" title="Samlet inn via Lipscore fra verifisert kjøp">{CHECK_SVG} Verifisert kjøp</span></div>'
+            f'{prod_html}'
             f'</footer></article>')
+
+
+def breakdown_html(votes):
+    n = len(votes) or 1
+    teller = {i: 0 for i in (5, 4, 3, 2, 1)}
+    for r in votes:
+        teller[max(1, min(5, int(round(r["rating"]))))] += 1
+    star = (f'<svg width="13" height="13" viewBox="0 0 20 20" aria-hidden="true">'
+            f'<path fill="#A57D85" d="{STAR_PATH}"/></svg>')
+    rows = []
+    for i in (5, 4, 3, 2, 1):
+        pct = teller[i] / n * 100
+        rows.append(
+            f'<button class="brow" data-r="{i}" aria-label="Vis omtaler med {i} stjerner">'
+            f'<span class="brow-label">{i} {star}</span>'
+            f'<span class="brow-track"><span class="brow-fill" style="width:{pct:.1f}%"></span></span>'
+            f'<span class="brow-n">{teller[i]}</span></button>')
+    return (f'<div class="breakdown-card"><p class="breakdown-title">Fordeling av {len(votes)} vurderinger</p>'
+            + "".join(rows) +
+            '<p class="breakdown-note">Trykk på en rad for å lese omtalene.</p></div>')
 
 
 def product_cards(votes, by_handle, by_title):
@@ -228,6 +253,7 @@ def build():
     wall_html = "".join(review_card(r, by_handle, by_title, hidden=(i >= WALL_BATCH))
                         for i, r in enumerate(cards))
     prods_html = product_cards(votes, by_handle, by_title)
+    breakdown = breakdown_html(votes)
 
     stille_note = (f' I tillegg har {n_stille} kunder gitt stjernevurdering uten tekst.'
                    if n_stille > 0 else '')
@@ -284,21 +310,28 @@ def build():
 
 <main>
 <section class="hero">
-  <h1>Hva kundene sier om&nbsp;Flor</h1>
-  <div class="hero-rating">
-    <span class="hero-avg">{avg_str}</span>
-    {stars_svg(avg, 26)}
-    <span class="hero-count">av 5, basert på {n_votes} vurderinger</span>
+  <div class="hero-inner">
+    <div class="hero-main">
+      <h1>Hva kundene sier om&nbsp;Flor</h1>
+      <div class="hero-rating">
+        <span class="hero-avg">{avg_str}</span>
+        <span class="hero-stars">{stars_svg(avg, 24)}<span class="hero-count">av 5, fra {n_votes} verifiserte kjøp</span></span>
+      </div>
+      <p class="hero-sub">Omtalene er samlet inn av <strong>Lipscore</strong> fra verifiserte kjøp hos
+      <a href="{SHOP_URL}?{UTM}" rel="noopener">florworks.no</a> — nettbutikken til Flor, norsk produsent av arbeidsklær for damer.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="{SHOP_URL}?{UTM}" rel="noopener">Se arbeidsklærne</a>
+        <a class="btn btn-ghost" href="#alle">Les omtalene</a>
+      </div>
+    </div>
+    {breakdown}
   </div>
-  <p class="hero-sub">Omtalene er samlet inn av <strong>Lipscore</strong> fra verifiserte kjøp hos
-  <a href="{SHOP_URL}?{UTM}" rel="noopener">florworks.no</a> — nettbutikken til Flor, norsk produsent av arbeidsklær for damer.</p>
-  <a class="btn btn-primary" href="{SHOP_URL}?{UTM}" rel="noopener">Se arbeidsklærne</a>
 </section>
 
 <section class="section">
   <h2>Utvalgte omtaler</h2>
   <p class="section-sub">Automatisk utvalg blant de nyeste omtalene med toppvurdering.</p>
-  <div class="grid grid-featured">{feat_html}</div>
+  <div class="masonry m3">{feat_html}</div>
 </section>
 
 <section class="section section-beige">
@@ -319,7 +352,7 @@ def build():
     <input type="search" id="sok" placeholder="Søk i omtaler …" aria-label="Søk i omtaler">
   </div>
   <p class="filter-status" id="status" aria-live="polite"></p>
-  <div class="grid grid-wall" id="vegg">{wall_html}</div>
+  <div class="masonry m3" id="vegg">{wall_html}</div>
   <div class="mer-wrap"><button class="btn btn-primary" id="mer">Vis flere omtaler</button></div>
 </section>
 
@@ -377,6 +410,25 @@ def build():
       cards = document.querySelectorAll('#vegg .card'), status = document.getElementById('status'),
       mer = document.getElementById('mer'), merWrap = mer.parentElement,
       BATCH = {WALL_BATCH}, limit = BATCH, aktiv = 'alle';
+
+  function sjekkKlamp() {{
+    document.querySelectorAll('.card:not(.klampsjekket)').forEach(function (c) {{
+      if (c.offsetParent === null) return;
+      c.classList.add('klampsjekket');
+      var t = c.querySelector('.card-text');
+      if (t && t.scrollHeight > t.clientHeight + 3) {{
+        var b = document.createElement('button');
+        b.className = 'lesmer';
+        b.textContent = 'Les mer';
+        b.addEventListener('click', function () {{
+          var apen = c.classList.toggle('expanded');
+          b.textContent = apen ? 'Vis mindre' : 'Les mer';
+        }});
+        t.after(b);
+      }}
+    }});
+  }}
+
   function oppdater() {{
     var q = (sok.value || '').toLowerCase().trim(), treff = 0, vist = 0,
         filtrert = aktiv !== 'alle' || q;
@@ -390,7 +442,9 @@ def build():
     }});
     merWrap.style.display = (!filtrert && treff > limit) ? '' : 'none';
     status.textContent = filtrert ? 'Viser ' + vist + ' av ' + cards.length + ' omtaler' : '';
+    sjekkKlamp();
   }}
+
   chips.forEach(function (ch) {{
     ch.addEventListener('click', function () {{
       aktiv = ch.dataset.filter;
@@ -400,7 +454,17 @@ def build():
   }});
   sok.addEventListener('input', oppdater);
   mer.addEventListener('click', function () {{ limit += BATCH; oppdater(); }});
+
+  document.querySelectorAll('.brow').forEach(function (b) {{
+    b.addEventListener('click', function () {{
+      var chip = document.querySelector('.chip[data-filter="' + b.dataset.r + '"]');
+      if (chip) chip.click();
+      document.getElementById('alle').scrollIntoView({{ behavior: 'smooth' }});
+    }});
+  }});
+
   oppdater();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sjekkKlamp);
 }})();
 </script>
 </body>
