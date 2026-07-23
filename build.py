@@ -190,6 +190,31 @@ def review_card(r, by_handle, by_title, featured=False, hidden=False):
             f'</footer></article>')
 
 
+def est_card_height(r):
+    """Grovt høydeestimat i px for kolonnebalansering (16px Jost, ~42 tegn/linje, klamp 8 linjer)."""
+    lines = min(8, max(1, math.ceil(len(r["text"]) / 42)))
+    h = 150 + lines * 25
+    if r["reply"]:
+        h += 45 + math.ceil(len(r["reply"]) / 45) * 21
+    if r["product"]:
+        h += 26
+    return h
+
+
+def featured_columns(featured, by_handle, by_title):
+    """Fordel utvalgte kort i 3 kolonner etter estimert høyde (LPT: høyeste først,
+    alltid i den korteste kolonnen) så bunnkantene blir tilnærmet jevne."""
+    items = sorted(featured, key=est_card_height, reverse=True)
+    cols, heights = [[] for _ in range(3)], [0.0] * 3
+    for r in items:
+        i = heights.index(min(heights))
+        cols[i].append(r)
+        heights[i] += est_card_height(r)
+    return "".join(
+        '<div class="fcol">' + "".join(review_card(r, by_handle, by_title, featured=True) for r in col) + '</div>'
+        for col in cols)
+
+
 def breakdown_html(votes):
     n = len(votes) or 1
     teller = {i: 0 for i in (5, 4, 3, 2, 1)}
@@ -251,7 +276,7 @@ def build():
     featured = [r for r in cards if r["rating"] >= 5 and len(r["text"]) >= 80][:6]
     if len(featured) < 6:
         featured = sorted(cards, key=lambda r: (r["rating"], len(r["text"])), reverse=True)[:6]
-    feat_html = "".join(review_card(r, by_handle, by_title, featured=True) for r in featured)
+    feat_html = featured_columns(featured, by_handle, by_title)
     wall_html = "".join(review_card(r, by_handle, by_title, hidden=(i >= WALL_BATCH))
                         for i, r in enumerate(cards))
     prods_html = product_cards(votes, by_handle, by_title)
@@ -333,7 +358,7 @@ def build():
 <section class="section">
   <h2>Utvalgte omtaler</h2>
   <p class="section-sub">Automatisk utvalg blant de nyeste omtalene med toppvurdering.</p>
-  <div class="masonry m3">{feat_html}</div>
+  <div class="featured-cols">{feat_html}</div>
 </section>
 
 <section class="section section-beige">

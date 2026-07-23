@@ -165,6 +165,28 @@ button { font-family: 'Jost', sans-serif; }
 @media (max-width: 960px) { .masonry { columns: 2; } }
 @media (max-width: 600px) { .masonry { columns: 1; } }
 
+/* utvalgte: 3 høydebalanserte kolonner (fordelt i byggescriptet) */
+.featured-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.fcol { display: grid; gap: 18px; align-content: start; }
+.featured-cols .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.featured-cols .card.expanded .card-text { display: block; -webkit-line-clamp: unset; }
+@media (max-width: 960px) {
+  .featured-cols { display: block; columns: 2; column-gap: 18px; }
+  .fcol { display: contents; }
+  .featured-cols .card { break-inside: avoid; -webkit-column-break-inside: avoid; margin: 0 0 18px; }
+}
+@media (max-width: 600px) { .featured-cols { columns: 1; } }
+
 /* produktgrid (like kort, vanlig grid) */
 .grid { display: grid; gap: 18px; }
 .grid-products { grid-template-columns: repeat(4, 1fr); }
