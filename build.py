@@ -273,9 +273,9 @@ def build():
     n_cards = len(cards)
     n_stille = n_votes - n_cards
 
-    featured = [r for r in cards if r["rating"] >= 5 and len(r["text"]) >= 80][:6]
-    if len(featured) < 6:
-        featured = sorted(cards, key=lambda r: (r["rating"], len(r["text"])), reverse=True)[:6]
+    featured = [r for r in cards if r["rating"] >= 5 and len(r["text"]) >= 80][:12]
+    if len(featured) < 12:
+        featured = sorted(cards, key=lambda r: (r["rating"], len(r["text"])), reverse=True)[:12]
     feat_html = featured_columns(featured, by_handle, by_title)
     wall_html = "".join(review_card(r, by_handle, by_title, hidden=(i >= WALL_BATCH))
                         for i, r in enumerate(cards))
@@ -358,7 +358,10 @@ def build():
 <section class="section">
   <h2>Utvalgte omtaler</h2>
   <p class="section-sub">Automatisk utvalg blant de nyeste omtalene med toppvurdering.</p>
-  <div class="featured-cols">{feat_html}</div>
+  <div class="featured-wrap">
+    <div class="featured-cols">{feat_html}</div>
+    <div class="fade-cta"><a class="btn btn-primary" href="#alle">Se alle omtalene</a></div>
+  </div>
 </section>
 
 <section class="section section-beige">
@@ -379,8 +382,10 @@ def build():
     <input type="search" id="sok" placeholder="Søk i omtaler …" aria-label="Søk i omtaler">
   </div>
   <p class="filter-status" id="status" aria-live="polite"></p>
-  <div class="masonry m3" id="vegg">{wall_html}</div>
-  <div class="mer-wrap"><button class="btn btn-primary" id="mer">Vis flere omtaler</button></div>
+  <div class="wall-wrap" id="vegg-wrap">
+    <div class="masonry m3" id="vegg">{wall_html}</div>
+    <div class="mer-wrap"><button class="btn btn-primary" id="mer">Vis flere omtaler</button></div>
+  </div>
 </section>
 
 <section class="section section-beige">
@@ -436,10 +441,11 @@ def build():
   var chips = document.querySelectorAll('.chip'), sok = document.getElementById('sok'),
       cards = document.querySelectorAll('#vegg .card'), status = document.getElementById('status'),
       mer = document.getElementById('mer'), merWrap = mer.parentElement,
+      wrap = document.getElementById('vegg-wrap'),
       BATCH = {WALL_BATCH}, limit = BATCH, aktiv = 'alle';
 
   function sjekkKlamp() {{
-    document.querySelectorAll('.card:not(.klampsjekket)').forEach(function (c) {{
+    document.querySelectorAll('#vegg .card:not(.klampsjekket)').forEach(function (c) {{
       if (c.offsetParent === null) return;
       c.classList.add('klampsjekket');
       var t = c.querySelector('.card-text');
@@ -467,7 +473,9 @@ def build():
       c.style.display = vis ? '' : 'none';
       if (vis) vist++;
     }});
-    merWrap.style.display = (!filtrert && treff > limit) ? '' : 'none';
+    var flere = !filtrert && treff > limit;
+    merWrap.style.display = flere ? '' : 'none';
+    wrap.classList.toggle('has-more', flere);
     status.textContent = filtrert ? 'Viser ' + vist + ' av ' + cards.length + ' omtaler' : '';
     sjekkKlamp();
   }}

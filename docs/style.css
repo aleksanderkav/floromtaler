@@ -165,6 +165,27 @@ button { font-family: 'Jost', sans-serif; }
 @media (max-width: 960px) { .masonry { columns: 2; } }
 @media (max-width: 600px) { .masonry { columns: 1; } }
 
+/* utvalgte: fast høyde med fade-ut og CTA — bunnkanten er alltid myk */
+.featured-wrap {
+  position: relative;
+  max-height: 620px;
+  overflow: hidden;
+}
+.featured-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 230px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+  pointer-events: none;
+}
+.fade-cta {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  text-align: center;
+  z-index: 2;
+}
+
 /* utvalgte: 3 høydebalanserte kolonner (fordelt i byggescriptet) */
 .featured-cols {
   display: grid;
@@ -324,8 +345,22 @@ span.card-product { color: var(--dark); }
 #sok:focus { outline: none; border-color: var(--mauve); }
 .filter-status { font-size: 14px; color: var(--dark); min-height: 22px; margin-bottom: 8px; }
 
-/* vis flere */
-.mer-wrap { text-align: center; margin-top: 24px; }
+/* veggen: fade over siste parti så bunnen aldri slutter hardt, knappen oppå */
+.wall-wrap { position: relative; }
+.wall-wrap.has-more::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 240px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 82%);
+  pointer-events: none;
+}
+.mer-wrap {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  text-align: center;
+  z-index: 2;
+}
 .mer-wrap .btn { cursor: pointer; }
 
 /* om flor */
