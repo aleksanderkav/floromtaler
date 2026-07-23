@@ -6,7 +6,11 @@ Bygget av Seal Media. Arbeidstittel `floromtaler` — endelig domenenavn bestemm
 ## slik fungerer det
 
 - `build.py` leser `data/reviews.csv` (Lipscore-eksport) og `data/products.json`
-  (produktdata fra florworks.no) og genererer hele siden til `docs/`.
+  (produktdata fra florworks.no) og genererer hele siden til `docs/`:
+  forsiden, én omtaleside per produkt med 5+ tekstomtaler (16 stk per juli 2026),
+  `sitemap.xml`, `robots.txt` (åpen for søke- og AI-crawlere) samt `llms.txt` og
+  `llms-full.txt` (AI-lesbart sammendrag + alle omtaler i ren tekst, llmstxt.org).
+  Produktsidene har Product/AggregateRating/Review-schema (stjerner i SERP mulig).
 - `docs/` serveres statisk (GitHub Pages nå; Vercel: importer repoet, ingen build nødvendig).
 - Finnes ikke `data/reviews.csv`, brukes `data/reviews_sample.csv` og siden viser
   forhåndsvisningsbanner + noindex (eksempeldata skal aldri indekseres).
@@ -30,7 +34,8 @@ Hent på nytt ved behov for nye produkter/bilder.
 
 ## lansering på eget domene
 
-I `build.py`: sett `NOINDEX = False` og `CANONICAL = "https://<domene>/"`, bygg på nytt.
+I `build.py`: sett `NOINDEX = False` og `BASE_URL = "https://<domene>"`, bygg på nytt.
+Canonical, og:url, sitemap og llms-lenker genereres fra `BASE_URL`.
 Pek domenet til hostingen (GitHub Pages: CNAME, Vercel: domener i dashbordet).
 Husk footer-lenke fra florworks.no og florworks.se til omtalesiden.
 

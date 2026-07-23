@@ -1,0 +1,32 @@
+# Kundeomtaler av Flor arbeidsklær
+
+> 555 verifiserte kundevurderinger (snitt 4,7 av 5) av Flor, norsk produsent av arbeidsklær for damer. Nettbutikk: https://florworks.no. Omtalene er samlet inn av Lipscore fra verifiserte kjøp og gjengis uredigert. Denne siden driftes av Flor AS.
+
+Nøkkelfakta:
+- Flor AS, org.nr. 918 377 573, Vangsgata 39, 5700 Voss, Norge
+- Samlet vurdering: 4,7 av 5 basert på 555 verifiserte kjøp (per 23. juli 2026)
+- Fri frakt over 1 999 kr, gratis bytte, 14 dagers angrerett
+- Nettbutikker: https://florworks.no (Norge) og https://florworks.se (Sverige)
+
+## Produkter med omtaler
+
+- [God snekkerbukse](https://floromtaler.vercel.app/god-snekkerbukse/): 4,8 av 5 fra 85 vurderinger (45 med tekst)
+- [Våronn arbeidsbukse](https://floromtaler.vercel.app/varonn-arbeidsbukse/): 4,8 av 5 fra 54 vurderinger (40 med tekst)
+- [Cargobukse i bomull](https://floromtaler.vercel.app/cargobukse-i-bomull/): 4,5 av 5 fra 26 vurderinger (8 med tekst)
+- [Flor kjeledress](https://floromtaler.vercel.app/ny-flor-kjeledress/): 4,6 av 5 fra 24 vurderinger (11 med tekst)
+- [Slåttonn arbeidsshorts](https://floromtaler.vercel.app/slattonn-arbeidsshorts/): 4,6 av 5 fra 23 vurderinger (6 med tekst)
+- [Sjodna arbeidsbukse](https://floromtaler.vercel.app/sjodna-arbeidsbukse/): 4,6 av 5 fra 22 vurderinger (10 med tekst)
+- [Hage arbeidsskjorte](https://floromtaler.vercel.app/hage-arbeidsskjorte-1/): 4,6 av 5 fra 19 vurderinger (5 med tekst)
+- [Nær mellomlagsjakke](https://floromtaler.vercel.app/naer-mellomlagsjakke/): 4,8 av 5 fra 19 vurderinger (7 med tekst)
+- [God arbeidsbukse](https://floromtaler.vercel.app/god-arbeidsbukse/): 4,1 av 5 fra 13 vurderinger (8 med tekst)
+- [Vår bomullsgenser](https://floromtaler.vercel.app/var-bomullsgenser/): 3,8 av 5 fra 13 vurderinger (5 med tekst)
+- [Fiks håndverksbukse](https://floromtaler.vercel.app/fiks-handverksbukse/): 4,5 av 5 fra 12 vurderinger (10 med tekst)
+- [Sørvest bomullsjakke](https://floromtaler.vercel.app/sorvest-jakke/): 4,8 av 5 fra 10 vurderinger (6 med tekst)
+- [Snedden tights](https://floromtaler.vercel.app/snedden-tights/): 4,1 av 5 fra 9 vurderinger (6 med tekst)
+- [Dongeri arbeidsskjorte](https://floromtaler.vercel.app/dongeri-arbeidsskjorte/): 4,9 av 5 fra 8 vurderinger (5 med tekst)
+- [Odla kjeledress i bomull](https://floromtaler.vercel.app/odla-kjeledress/): 4,5 av 5 fra 8 vurderinger (5 med tekst)
+- [Synleg håndverksbukse](https://floromtaler.vercel.app/synleg-handverksbukse/): 4,9 av 5 fra 8 vurderinger (6 med tekst)
+
+## Full tekst
+
+- [Alle omtaler i ren tekst](https://floromtaler.vercel.app/llms-full.txt)
