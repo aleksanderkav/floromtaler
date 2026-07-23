@@ -162,7 +162,9 @@ CHECK_SVG = ('<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"
 def review_card(r, by_handle, by_title, featured=False, hidden=False):
     d = fmt_date(r["date"])
     prod_html = ""
-    if r["product"]:
+    if norm(r["product"]) in ("service reviews", "service review"):
+        prod_html = '<span class="card-product">Butikkomtale</span>'
+    elif r["product"]:
         p = match_product(r, by_handle, by_title)
         if p:
             prod_html = (f'<a class="card-product" href="{SHOP_URL}/products/{p["handle"]}?{UTM}" '
