@@ -240,6 +240,39 @@ def is_service(r):
     return norm(r["product"]) in ("service reviews", "service review")
 
 
+# ---- feilkoblede omtaler -----------------------------------------------------
+# Lipscore lar kunden omtale flere produkter i samme skjema, og teksten havner av og
+# til på feil plagg (kunde 2026-08-01: kommentar om hofter vist på ei arbeidsskjorte).
+# Vi skjuler TEKSTEN på slike, men beholder stjernene i snittet — en feilplassert tekst
+# skal ikke villede, og et ekte terningkast skal ikke forsvinne. Reglene er bevisst
+# strenge: teksten må navngi et plagg som motsier produktet.
+
+# Plagg som bare dekker overkroppen (kjeledress/kjole/forkle er utelatt med vilje —
+# de dekker hoftene og kan derfor omtales med «trang over hoftene»).
+OVERDEL = re.compile(r"skjorte|genser|jakke|trøye|troye|vest|ullfleece|hettejakke", re.I)
+UNDERDEL = re.compile(r"bukse|tights|shorts", re.I)
+
+# Ord i teksten som utvetydig peker på én plaggtype.
+T_UNDERDEL = re.compile(r"\b(bukse\w*|buks[ae]|snekkerbukse\w*|tights|shorts|hofte\w*|lår|skritt)\b", re.I)
+T_OVERDEL = re.compile(r"\b(skjorte\w*|skjorta|genser\w*|jakke\w*|jakka|erme\w*|erma)\b", re.I)
+
+
+def feilkoblet(r):
+    """True når omtaleteksten åpenbart handler om et annet plagg enn produktet den ligger på."""
+    tekst, produkt = r.get("text", ""), r.get("product", "")
+    if not tekst.strip() or is_service(r):
+        return False
+    over, under = bool(OVERDEL.search(produkt)), bool(UNDERDEL.search(produkt))
+    if over == under:                      # ukjent eller blandet plaggtype: la stå
+        return False
+    t_over, t_under = bool(T_OVERDEL.search(tekst)), bool(T_UNDERDEL.search(tekst))
+    if over and t_under and not t_over:
+        return True
+    if under and t_over and not t_under:
+        return True
+    return False
+
+
 # ---- data --------------------------------------------------------------------
 
 def load_reviews():
@@ -289,9 +322,20 @@ def load_reviews():
                 "handle": handle_of(get(r, "url")),
                 "reply": get(r, "reply"),
             })
+
+    # Feilkoblet tekst nulles ut: stjernen teller videre, teksten vises ikke.
+    feil = [v for v in votes if feilkoblet(v)]
+    for v in feil:
+        v["text"] = ""
+        v["reply"] = ""
+
     votes.sort(key=lambda x: (x["date"] or date(1970, 1, 1)), reverse=True)
     if dropped:
         print(f"  ({dropped} fjernede/avpubliserte rader holdt utenfor)")
+    if feil:
+        print(f"  ({len(feil)} omtaler skjult som feilkoblet — stjernene teller fortsatt):")
+        for v in feil:
+            print(f"     [{v['rating']:.0f}*] {v['name']} på «{v['product']}»")
     return votes, sample
 
 
