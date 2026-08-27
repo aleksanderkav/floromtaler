@@ -165,7 +165,10 @@ L_SV = {
                    'trädgård till förskola och verkstad. Den svenska webbutiken hittar du på '
                    '<a href="{shop}?{utm}" rel="noopener">florworks.se</a> '
                    '(och <a href="{shop2}?{utm}" rel="noopener">florworks.no</a> i Norge).</p>'),
-    "trust": ["Fri frakt vid köp över 1 000 kr (startkampanj)", "Byte och retur via kontakt@florworks.no",
+    # Fakta kontrollert mot florworks.se 27.08.26. Butikkens infoside oppgir fortsatt
+    # startkampanjen (fri frakt over 1 000 kr), men kassen og toppstripa krever 1 999 kr.
+    # Vi følger kassen, siden det er den kunden faktisk betaler etter.
+    "trust": ["Fri frakt vid köp över 1 999 kr", "Byte och retur via kontakt@florworks.no",
               "14 dagars ångerrätt enligt lag", "Recensioner från verifierade köp via Lipscore"],
     "faq_h2": "Vanliga frågor",
     "faq": [
@@ -174,12 +177,14 @@ L_SV = {
          "på nätet i många år. Recensionerna på den här sidan samlas in av tredje parten Lipscore och kommer "
          "från verifierade köp i webbutiken."),
         ("Vad kostar frakten till Sverige?",
-         "Fri frakt vid köp över 1 000 kr (startkampanj). För ordrar under 1 000 kr är fraktkostnaden 199 kr."),
+         "Fri frakt vid köp över 1 999 kr. För mindre ordrar visas fraktkostnaden i kassan innan du betalar. "
+         "Beställningar skickas inom två arbetsdagar, hem till brevlådan eller till utlämningsställe."),
         ("Kan jag byta om storleken inte passar?",
          "Ja. Skicka ett e-postmeddelande till kontakt@florworks.no med ordernummer, namnet på beställningen "
          "och vilket plagg det gäller. Plagget ska vara oanvänt med etiketter kvar."),
         ("Vad gäller för retur och ångerrätt?",
-         "Du har 14 dagars ångerrätt enligt lag. Kontakta kontakt@florworks.no så hjälper Flor dig med returen."),
+         "Du har 14 dagars ångerrätt enligt lag. Kontakta kontakt@florworks.no så hjälper Flor dig med returen. "
+         "Vid ångrat köp står du själv för returfrakten."),
         ("Hur hittar jag rätt storlek?",
          "Varje produkt har en egen storleksguide. Är du osäker hjälper Flor dig på kontakt@florworks.no."),
     ],
@@ -193,10 +198,35 @@ L_SV = {
 
 CUR = L_NB
 
+# ---- marked ------------------------------------------------------------------
+# Butikkene deler handles, men ikke navn og pris: florworks.se selger «God
+# snickarbyxor» til 1 899 SEK der florworks.no selger «God snekkerbukse» til
+# 1 799 NOK. products=None betyr «bruk products.json som den er» (norsk marked).
+
+M_NB = {"products": None, "titles": {}}
+M_SV = {"products": None, "titles": {}}
+MARKET = M_NB
+
 
 def set_lang(L):
-    global CUR
+    global CUR, MARKET
     CUR = L
+    MARKET = M_NB if L["lang"] == "nb" else M_SV
+
+
+def market_product(p):
+    """Produktet slik markedets butikk viser det, eller None om det ikke selges der."""
+    if MARKET["products"] is None:
+        return p
+    return MARKET["products"].get(p["handle"])
+
+
+def market_label(r):
+    """Produktnavnet i markedets butikk. Lipscore lagrer alltid det norske navnet."""
+    if MARKET["products"] is None:
+        return r["product"]
+    se = MARKET["products"].get(r["handle"]) or {}
+    return se.get("title") or MARKET["titles"].get(norm(r["product"])) or r["product"]
 
 
 def esc(s):
@@ -344,7 +374,26 @@ def load_products():
         prods = json.load(f)
     by_handle = {p["handle"]: p for p in prods}
     by_title = {norm(p["title"]): p for p in prods}
+    load_market_se(by_handle)
     return by_handle, by_title
+
+
+def load_market_se(by_handle):
+    """Svensk overlegg fra data/products_se.json (se fetch_products.py).
+
+    Uten fila ville /se/ vist norske produktnavn og NOK-priser som om de var
+    svenske. Det er en feil pris til kunden, ikke en skjønnhetsfeil, så vi sier
+    tydelig fra i stedet for å bygge stille.
+    """
+    sti = os.path.join(BASE, "data", "products_se.json")
+    if not os.path.exists(sti):
+        print("ADVARSEL: data/products_se.json mangler — /se/ bygges med norske navn og "
+              "NOK-priser. Kjør: python3 fetch_products.py")
+        return
+    with open(sti, encoding="utf-8") as f:
+        se = {p["handle"]: p for p in json.load(f)}
+    M_SV["products"] = se
+    M_SV["titles"] = {norm(p["title"]): se[h]["title"] for h, p in by_handle.items() if h in se}
 
 
 def slug_of(handle, opptatt):
@@ -399,18 +448,19 @@ def review_card(r, resolve_link, featured=False, hidden=False, show_product=True
         if is_service(r):
             prod_html = f'<span class="card-product">{CUR["service_label"]}</span>'
         elif r["product"]:
+            navn = market_label(r)
             lenke = resolve_link(r)
             if lenke:
                 href, internal = lenke
                 rel = "" if internal else ' rel="noopener"'
-                prod_html = f'<a class="card-product" href="{href}"{rel}>{esc(r["product"])}</a>'
+                prod_html = f'<a class="card-product" href="{href}"{rel}>{esc(navn)}</a>'
             else:
-                prod_html = f'<span class="card-product">{esc(r["product"])}</span>'
+                prod_html = f'<span class="card-product">{esc(navn)}</span>'
     reply_html = ""
     if r["reply"]:
         reply_html = (f'<div class="card-reply"><span class="reply-label">{CUR["reply_label"]}</span>'
                       f'<p>{esc(r["reply"])}</p></div>')
-    search = norm(f'{r["text"]} {r["name"]} {r["product"]}')
+    search = norm(f'{r["text"]} {r["name"]} {r["product"]} {market_label(r)}')
     cls = "card featured" if featured else "card"
     if hidden:
         cls += " batch-hidden"
@@ -754,12 +804,13 @@ def product_cards_html(votes, by_handle, by_title, sider, shop, internal):
         a = agg.setdefault(p["handle"], {"sum": 0, "n": 0, "p": p})
         a["sum"] += r["rating"]
         a["n"] += 1
-    ranked = sorted([a for a in agg.values() if a["n"] >= 2],
+    ranked = sorted([a for a in agg.values() if a["n"] >= 2 and market_product(a["p"])],
                     key=lambda a: (a["sum"] / a["n"]) * math.log(a["n"] + 1), reverse=True)
     ent, fler = CUR["ratings_word"].split("|")
     cards = []
     for a in ranked[:4]:
         p, avg = a["p"], a["sum"] / a["n"]
+        p = market_product(p)          # svensk tittel og SEK-pris på /se/
         h = p["handle"]
         pris = ""
         if p.get("price"):
@@ -798,7 +849,7 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
         if nb and r["handle"] and r["handle"] in sider:
             return (f'{sider[r["handle"]]["slug"]}/', True)
         p = by_handle.get(r["handle"]) or by_title.get(norm(r["product"]))
-        if p:
+        if p and market_product(p):     # ikke lenk til produkter markedet ikke selger
             return (f'{shop}/products/{p["handle"]}?{UTM}', False)
         return None
 

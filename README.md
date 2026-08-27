@@ -29,8 +29,19 @@ blir lenket til produktet med UTM-parametre.
 
 ## oppdatere produktdata
 
-`data/products.json` er hentet fra `https://florworks.no/products.json?limit=250` (slanket).
-Hent på nytt ved behov for nye produkter/bilder.
+Kjør `python3 fetch_products.py` før `build.py`. Den henter begge butikkene og skriver
+slankede kataloger:
+
+- `data/products.json` — florworks.no: norske navn, NOK-priser. Styrer produktsidene.
+- `data/products_se.json` — florworks.se: svenske navn, SEK-priser. Overstyrer `/se/`.
+
+Butikkene deler produkt-handles, så den svenske fila brukes som et overlegg: samme produkt,
+men navnet og prisen slik en svensk kunde faktisk møter dem. Uten overlegget ville `/se/`
+vist «God snekkerbukse 1 799 kr» der butikken selger «God snickarbyxor» til 1 899 SEK.
+
+Produkter som er tatt ut av sortimentet forsvinner fra katalogen, og da fjerner `build.py`
+både produktsiden og lenkene til dem ved neste bygg. Skriptet skriver ut hva som er nytt
+og hva som er utgått.
 
 ## lansering på eget domene (sjekkliste)
 
