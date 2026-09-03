@@ -90,6 +90,7 @@ L_NB = {
     "featured_sub": "Automatisk utvalg blant de nyeste omtalene med toppvurdering.",
     "see_all": "Se alle omtalene",
     "products_h2": "Mest omtalte produkter",
+    "guide_link": "Guide: beste arbeidsbukse for damer, rangert av kundene →",
     "ratings_word": "vurdering|vurderinger",
     "see_product": "Se produktet",
     "read_all_fmt": "Les alle {n} omtalene →",
@@ -191,6 +192,7 @@ L_SV = {
     "featured_sub": "Automatiskt urval bland de senaste recensionerna med toppbetyg.",
     "see_all": "Se alla recensioner",
     "products_h2": "Mest recenserade produkter",
+    "guide_link": "Guide: bästa arbetsbyxan för dam, rankad av kunderna →",
     "ratings_word": "betyg|betyg",
     "see_product": "Se produkten",
     "read_all_fmt": "Läs alla {n} recensioner →",
@@ -974,7 +976,7 @@ def product_cards_html(votes, by_handle, by_title, sider, shop, internal):
     return "".join(cards)
 
 
-def build_index(votes, by_handle, by_title, sider, sample, L):
+def build_index(votes, by_handle, by_title, sider, sample, L, har_tema=True):
     set_site(L)
     nb = L["lang"] == "nb"
     shop = SHOP_URL if nb else SHOP_URL_SE
@@ -1004,6 +1006,8 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
     feat_html = featured_columns(featured, resolve)
     wall_html = "".join(review_card(r, resolve, hidden=(i >= WALL_BATCH)) for i, r in enumerate(cards))
     prods_html = product_cards_html(votes, by_handle, by_title, sider, shop, internal=True)
+    guide_html = (f'<p class="tilbake"><a href="{CUR["t_slug"]}/">{L["guide_link"]}</a></p>'
+                  if har_tema else "")
     breakdown = breakdown_html(votes)
     stille = L["wall_silent"].format(n=n_stille) if n_stille > 0 else ""
     faq_html = "".join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in L["faq"])
@@ -1046,6 +1050,7 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
 <section class="section section-beige">
   <h2>{L['products_h2']}</h2>
   <div class="grid grid-products">{prods_html}</div>
+  {guide_html}
 </section>
 
 <section class="section" id="alle">
@@ -1301,8 +1306,10 @@ def build_site(L, votes, by_handle, by_title, sider, sample, avg):
     os.makedirs(DOCS, exist_ok=True)
     os.makedirs(os.path.join(DOCS, "assets"), exist_ok=True)
 
+    tema_finnes = len([1 for _ in bukse_ranking(sider) if True]) >= 3
     with open(os.path.join(DOCS, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_index(votes, by_handle, by_title, sider, sample, L))
+        f.write(build_index(votes, by_handle, by_title, sider, sample, L, har_tema=tema_finnes))
+    set_site(L)
     for h, slug, d in mine:
         os.makedirs(os.path.join(DOCS, slug), exist_ok=True)
         with open(os.path.join(DOCS, slug, "index.html"), "w", encoding="utf-8") as f:
