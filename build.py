@@ -871,14 +871,14 @@ def build_theme_page(sider, sample, L):
         rows.append(f"""
   <article class="rank-item">
     <span class="rank-nr">{i}</span>
-    <a class="rank-img" href="{slug}/"><img src="{p['image']}&width=480" alt="{esc(p['title'])}" loading="lazy" width="480" height="600"></a>
+    <a class="rank-img" href="../{slug}/"><img src="{p['image']}&width=480" alt="{esc(p['title'])}" loading="lazy" width="480" height="600"></a>
     <div class="rank-main">
-      <h3><a href="{slug}/">{esc(p['title'])}</a></h3>
+      <h3><a href="../{slug}/">{esc(p['title'])}</a></h3>
       <div class="rank-rating">{stars_svg(avg, 16)}<span>{CUR['t_rating'].format(a=no_num(avg), n=len(rs))}</span>{pris}</div>
       {sitat_html}
       <div class="rank-links">
         <a class="btn btn-primary" href="{shop}/products/{h}?{UTM}" rel="noopener">{CUR['t_see']}</a>
-        <a class="btn btn-ghost" href="{slug}/">{CUR['t_read'].format(n=len(tekster))}</a>
+        <a class="btn btn-ghost" href="../{slug}/">{CUR['t_read'].format(n=len(tekster))}</a>
       </div>
     </div>
   </article>""")
@@ -1340,6 +1340,31 @@ def build_site(L, votes, by_handle, by_title, sider, sample, avg):
     return len(mine), bool(tema)
 
 
+def sjekk_lenker(rot):
+    """Alle relative href/src må peke på noe som faktisk finnes i utmappa.
+
+    Lagt inn 03.09.26 etter at temasidens produktlenker hadde pekt på
+    /<tema-slug>/<produkt-slug>/ og gitt 404 siden 27.08 uten at noen så det.
+    """
+    brutte = []
+    for dirpath, _, files in os.walk(rot):
+        for f in files:
+            if not f.endswith(".html"):
+                continue
+            rel_dir = os.path.relpath(dirpath, rot)
+            for m in re.finditer(r'(?:href|src)="([^"]+)"', open(os.path.join(dirpath, f), encoding="utf-8").read()):
+                u = m.group(1)
+                if u.startswith(("http", "//", "mailto:", "#", "data:")):
+                    continue
+                mål = os.path.normpath(os.path.join(rel_dir, u.split("?")[0].split("#")[0]))
+                sti = os.path.join(rot, mål)
+                if os.path.isdir(sti) or u.endswith("/"):
+                    sti = os.path.join(rot, mål, "index.html")
+                if not os.path.exists(sti):
+                    brutte.append((os.path.relpath(os.path.join(dirpath, f), rot), u))
+    return brutte
+
+
 def build():
     votes, sample = load_reviews()
     by_handle, by_title = load_products()
@@ -1351,6 +1376,17 @@ def build():
     print(f"OK: {len(votes)} vurderinger ({n_cards} med tekst), snitt {no_num(avg)}/5, modus: {mode}")
     for L in (L_NB, L_SV):
         build_site(L, votes, by_handle, by_title, sider, sample, avg)
+    feil = 0
+    for rot, navn in ((DOCS_NB, "floromtaler.no"), (DOCS_SV, "florrecensioner.se")):
+        brutte = sjekk_lenker(rot)
+        if brutte:
+            feil += len(brutte)
+            print(f"  BRUTNE LENKER på {navn}: {len(brutte)}")
+            for side, u in brutte[:8]:
+                print(f"     {side} -> {u}")
+    if not feil:
+        print("  lenkesjekk: ingen brutte interne lenker på noen av nettstedene")
+
     uten_se = [d["p"]["title"] for d in sider.values() if not d.get("slug_sv")]
     if uten_se:
         print(f"  ({len(uten_se)} produkt(er) utelatt fra svensk side, selges ikke på florworks.se: "
