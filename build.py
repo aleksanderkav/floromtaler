@@ -23,8 +23,8 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 DOCS = os.path.join(BASE, "docs")
 
 # ---- lanseringsbrytere -------------------------------------------------------
-NOINDEX = True          # sett False ved lansering på eget domene
-BASE_URL = "https://floromtaler.vercel.app"   # byttes til eget domene ved lansering
+NOINDEX = False         # lansert på eget domene 2026-09-03
+BASE_URL = "https://floromtaler.no"   # eget domene, apex er kanonisk (www 308-redirigeres)
 SITE_TITLE = "Kundeomtaler av Flor arbeidsklær"
 SHOP_URL = "https://florworks.no"
 SHOP_URL_SE = "https://florworks.se"

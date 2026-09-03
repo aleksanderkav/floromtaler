@@ -37,4 +37,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://floromtaler.vercel.app/sitemap.xml
+Sitemap: https://floromtaler.no/sitemap.xml
