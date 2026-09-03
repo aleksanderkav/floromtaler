@@ -41,6 +41,12 @@ SHOP_URL_SE = "https://florworks.se"
 UTM_NB = "utm_source=floromtaler&utm_medium=referral&utm_campaign=omtaleside"
 UTM_SV = "utm_source=florrecensioner&utm_medium=referral&utm_campaign=recensionssida"
 UTM = UTM_NB            # settes per nettsted av set_site()
+
+# Search Console, URL-prefiks-property eid av aleksander@sealmedia.no.
+# Fjernes taggen, faller verifiseringen bort. Den skal bli stående.
+GSC_NB = "dbS_tzMghuG_1_zq7JT0FF2SpUtPXroiuWf1sAoYJAs"
+GSC_SV = "E4Uwq4qqJrgMGRp40gL8l8VtK-4ONIJpU8uEdOm1qBY"
+GSC = GSC_NB            # settes per nettsted av set_site()
 WALL_BATCH = 30         # antall omtaler synlig på forsiden før «Vis flere»
 MIN_PRODUCT_REVIEWS = 5 # tekstomtaler som kreves for egen produktside
 THEME_SLUG = "beste-arbeidsbukse-dame"
@@ -285,12 +291,13 @@ def set_lang(L):
 
 def set_site(L):
     """Språk, marked, kanonisk domene og utmappe henger sammen. Sett dem ett sted."""
-    global BASE_URL, DOCS, UTM
+    global BASE_URL, DOCS, UTM, GSC
     set_lang(L)
     nb = L["lang"] == "nb"
     BASE_URL = BASE_URL_NB if nb else BASE_URL_SV
     DOCS = DOCS_NB if nb else DOCS_SV
     UTM = UTM_NB if nb else UTM_SV
+    GSC = GSC_NB if nb else GSC_SV
 
 
 def alternates_for(slug_nb, slug_sv):
@@ -694,6 +701,7 @@ def page_shell(*, title, desc, path, body, prefix="", schema="", og_image=None, 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
+<meta name="google-site-verification" content="{GSC}">
 {head_extra}
 {og}
 <link rel="preconnect" href="https://fonts.googleapis.com">
