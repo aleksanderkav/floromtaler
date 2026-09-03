@@ -1,7 +1,17 @@
-# floromtaler — kundeomtaleside for Flor (florworks.no)
+# floromtaler — kundeomtalesider for Flor
 
-Statisk omtaleside som viser Lipscore-kundeomtaler av [florworks.no](https://florworks.no).
-Bygget av Seal Media. Arbeidstittel `floromtaler` — endelig domenenavn bestemmes av kunden.
+Statiske omtalesider som viser Lipscore-kundeomtaler av Flor. Bygget av Seal Media.
+Ett `build.py` genererer **to selvstendige nettsteder**, ett per marked:
+
+| Marked | Domene | Utmappe | Vercel-prosjekt | Root Directory |
+|---|---|---|---|---|
+| Norge (nb) | `floromtaler.no` | `docs/` | `floromtaler` | repo-rot |
+| Sverige (sv) | `florrecensioner.se` | `site-se/docs/` | `florrecensioner` | `site-se` |
+
+Egen ccTLD per marked er poenget: et `.no`-domene forteller Google at innholdet hører til
+Norge, og drar ned på brede svenske søk. Sidene er oversettelser av hverandre og bindes
+sammen med `hreflang` begge veier, per side. `floromtaler.no/se/` finnes ikke lenger, den
+301-redirigeres til `florrecensioner.se` i `vercel.json`.
 
 ## slik fungerer det
 
@@ -11,7 +21,12 @@ Bygget av Seal Media. Arbeidstittel `floromtaler` — endelig domenenavn bestemm
   `sitemap.xml`, `robots.txt` (åpen for søke- og AI-crawlere) samt `llms.txt` og
   `llms-full.txt` (AI-lesbart sammendrag + alle omtaler i ren tekst, llmstxt.org).
   Produktsidene har Product/AggregateRating/Review-schema (stjerner i SERP mulig).
-- `docs/` serveres statisk (GitHub Pages nå; Vercel: importer repoet, ingen build nødvendig).
+- `site-se/docs/` får samme behandling på svensk: svenske produktnavn og SEK-priser fra
+  `data/products_se.json`, svenske slugger fra det svenske produktnavnet
+  (`god-snickarbyxor`, ikke `god-snekkerbukse`), egen temaside `basta-arbetsbyxan-dam`,
+  eget sitemap/robots/llms og `utm_source=florrecensioner`. Produkter som ikke selges på
+  florworks.se utelates fra den svenske siden i stedet for å lenke til noe kunden ikke får kjøpt.
+- Begge mapper serveres statisk av hvert sitt Vercel-prosjekt, ingen build nødvendig.
 - Finnes ikke `data/reviews.csv`, brukes `data/reviews_sample.csv` og siden viser
   forhåndsvisningsbanner + noindex (eksempeldata skal aldri indekseres).
 
@@ -45,17 +60,20 @@ og hva som er utgått.
 
 ## lansering på eget domene (sjekkliste)
 
-1. I `build.py`: sett `NOINDEX = False` og `BASE_URL = "https://<domene>"`, bygg og push.
-   Canonical, hreflang, og:url, sitemap og llms-lenker genereres fra `BASE_URL`.
-2. Pek domenet til hostingen (Vercel: Domains i prosjektet; GitHub Pages: CNAME).
+1. I `build.py`: `NOINDEX = False` og riktig `BASE_URL_NB` / `BASE_URL_SV`, bygg og push.
+   Canonical, hreflang, og:url, sitemap og llms-lenker genereres fra `BASE_URL`, som
+   `set_site()` setter per nettsted.
+2. Pek domenet til Vercel-prosjektet (Domains i prosjektet). Apex er kanonisk, `www`
+   308-redirigeres til apex.
 3. Footer-lenke fra florworks.no og florworks.se til omtalesiden («Kundeomtaler ⭐ 4,7»).
 4. Google Search Console + Bing Webmaster Tools: legg til domenet, send inn sitemap.xml.
 5. IndexNow-ping (nøkkelfila ligger allerede i docs/):
    `curl "https://api.indexnow.org/indexnow?url=https://<domene>/&key=$(cat data/indexnow-key.txt)"`
    Gjenta gjerne etter hver dataoppdatering.
 
-Svensk versjon ligger på `/se/` med hreflang begge veier (nb ↔ sv). Temasiden
-`/beste-arbeidsbukse-dame/` regenereres automatisk fra omtaledataene.
+Temasidene `/beste-arbeidsbukse-dame/` og `/basta-arbetsbyxan-dam/` regenereres automatisk
+fra omtaledataene. Rangeringen beregnes på det norske produktnavnet, som er produktets
+identitet på tvers av butikkene, slik at de to sidene blir ekte oversettelser av hverandre.
 
 ## design
 

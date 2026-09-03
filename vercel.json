@@ -2,5 +2,9 @@
   "buildCommand": null,
   "outputDirectory": "docs",
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/se", "destination": "https://florrecensioner.se/", "permanent": true },
+    { "source": "/se/:path*", "destination": "https://florrecensioner.se/:path*", "permanent": true }
+  ]
 }

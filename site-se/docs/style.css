@@ -1,0 +1,495 @@
+/* Floromtaler — Flor-designtokens fra florworks.no (tema SEAL | Symmetry) */
+:root {
+  --mauve: #A57D85;
+  --mauve-dark: #8F6971;
+  --mauve-light: #DFC8CB;
+  --beige: #F5F3EE;
+  --text: #232323;
+  --link: #6E7F71;
+  --dark: #5C5C5C;
+  --border: #E7E2DC;
+  --white: #fff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+a { color: var(--link); }
+
+img { max-width: 100%; height: auto; }
+
+button { font-family: 'Jost', sans-serif; }
+
+:focus-visible { outline: 2px solid var(--mauve); outline-offset: 2px; }
+
+/* forhåndsvisningsbanner (kun sample-modus) */
+.preview-banner {
+  background: #232323;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 16px;
+  letter-spacing: 0.03em;
+}
+
+/* header */
+.site-header {
+  background: var(--mauve);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px clamp(16px, 4vw, 48px);
+}
+.logo img { display: block; width: 110px; height: auto; }
+.header-right { display: flex; align-items: center; gap: 18px; }
+.lang-link { color: rgba(255,255,255,.85); font-size: 14px; text-decoration: none; letter-spacing: 0.04em; }
+.lang-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+/* knapper */
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 3px;
+  padding: 12px 24px;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.btn-outline { color: #fff; border: 1px solid rgba(255,255,255,.75); }
+.btn-outline:hover { background: #fff; color: var(--mauve); }
+.btn-primary { background: var(--mauve); color: #fff; border: 1px solid var(--mauve); }
+.btn-primary:hover { background: var(--mauve-dark); border-color: var(--mauve-dark); }
+.btn-ghost { color: var(--text); border: 1px solid var(--text); }
+.btn-ghost:hover { background: var(--text); color: #fff; }
+
+/* hero */
+.hero {
+  background: var(--beige);
+  padding: clamp(44px, 7vw, 88px) clamp(16px, 4vw, 48px);
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.hero h1 { font-size: clamp(30px, 4.5vw, 46px); margin-bottom: 22px; }
+.hero-rating { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.hero-avg {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.hero-stars { display: flex; flex-direction: column; gap: 4px; }
+.hero-count { color: var(--dark); font-size: 15px; }
+.hero-sub { max-width: 460px; color: var(--dark); font-size: 16px; margin-bottom: 26px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* fordelingskort i hero */
+.breakdown-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: clamp(20px, 2.5vw, 28px);
+  box-shadow: 0 10px 30px rgba(35, 35, 35, .06);
+}
+.breakdown-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+.brow {
+  display: grid;
+  grid-template-columns: 44px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+}
+.brow:hover { background: var(--beige); }
+.brow-static { cursor: default; }
+.brow-static:hover { background: none; }
+.brow-label { display: inline-flex; align-items: center; gap: 4px; justify-content: flex-start; }
+.brow-track {
+  height: 8px;
+  background: #EFE9E3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.brow-fill {
+  display: block;
+  height: 100%;
+  background: var(--mauve);
+  border-radius: 4px;
+  min-width: 2px;
+}
+.brow-n { text-align: right; color: var(--dark); font-variant-numeric: tabular-nums; }
+.breakdown-note { font-size: 13px; color: var(--dark); margin-top: 10px; }
+
+/* seksjoner */
+.section { max-width: 1100px; margin: 0 auto; padding: clamp(44px, 6vw, 76px) 20px; }
+.section-beige { max-width: none; background: var(--beige); }
+.section-beige > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.section h2 { font-size: clamp(24px, 3.5vw, 32px); margin-bottom: 8px; }
+.section-sub { color: var(--dark); font-size: 16px; margin-bottom: 28px; max-width: 640px; }
+.section h2 + .masonry, .section h2 + .grid, .section h2 + .about { margin-top: 28px; }
+
+/* masonry-vegg: hvert kort beholder sin naturlige høyde */
+.masonry { columns: 3; column-gap: 18px; }
+.masonry .card { break-inside: avoid; -webkit-column-break-inside: avoid; margin: 0 0 18px; }
+@media (max-width: 960px) { .masonry { columns: 2; } }
+@media (max-width: 600px) { .masonry { columns: 1; } }
+
+/* utvalgte: fast høyde med fade-ut og CTA — bunnkanten er alltid myk */
+.featured-wrap {
+  position: relative;
+  max-height: 620px;
+  overflow: hidden;
+}
+.featured-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 230px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+  pointer-events: none;
+}
+.fade-cta {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* utvalgte: 3 høydebalanserte kolonner (fordelt i byggescriptet) */
+.featured-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.fcol { display: grid; gap: 18px; align-content: start; }
+.featured-cols .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.featured-cols .card.expanded .card-text { display: block; -webkit-line-clamp: unset; }
+@media (max-width: 960px) {
+  .featured-cols { display: block; columns: 2; column-gap: 18px; }
+  .fcol { display: contents; }
+  .featured-cols .card { break-inside: avoid; -webkit-column-break-inside: avoid; margin: 0 0 18px; }
+}
+@media (max-width: 600px) { .featured-cols { columns: 1; } }
+
+/* produktgrid (like kort, vanlig grid) */
+.grid { display: grid; gap: 18px; }
+.grid-products { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 960px) { .grid-products { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .grid-products { grid-template-columns: 1fr; } }
+
+/* omtalekort */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 20px;
+  transition: box-shadow .2s;
+}
+.card:hover { box-shadow: 0 6px 20px rgba(35, 35, 35, .07); }
+.card > * + * { margin-top: 10px; }
+.card.featured { border-top: 3px solid var(--mauve); }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.card-top time { font-size: 13px; color: var(--dark); white-space: nowrap; }
+.card-text { font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+
+/* lange omtaler klippes til 8 linjer; «Les mer» åpner */
+.masonry .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card.expanded .card-text { display: block; -webkit-line-clamp: unset; }
+.lesmer {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mauve);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lesmer:hover { color: var(--mauve-dark); }
+
+.card-foot { border-top: 1px solid var(--beige); padding-top: 12px; }
+.card-who { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.card-name { font-weight: 500; font-size: 15px; }
+.verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--mauve-dark);
+  white-space: nowrap;
+}
+.card-product {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--link);
+}
+span.card-product { color: var(--dark); }
+.stars svg { display: block; }
+
+/* svar fra butikken */
+.card-reply {
+  background: var(--beige);
+  border-left: 3px solid var(--mauve);
+  border-radius: 3px;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.card-reply .reply-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mauve-dark);
+  margin-bottom: 4px;
+}
+
+/* produktkort */
+.pcard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s, transform .2s;
+}
+.pcard:hover { box-shadow: 0 8px 24px rgba(35, 35, 35, .10); transform: translateY(-2px); }
+.pcard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-decoration: none;
+  color: var(--text);
+  flex: 1;
+}
+.pcard img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3px; margin-bottom: 4px; }
+.pcard-reviews {
+  display: block;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--beige);
+  font-size: 14px;
+  color: var(--link);
+}
+.p-title { font-weight: 500; font-size: 16px; line-height: 1.35; }
+.p-count { font-size: 13px; color: var(--dark); }
+.p-price { font-size: 14px; color: var(--dark); }
+.p-cta {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mauve);
+}
+.pcard:hover .p-cta { color: var(--mauve-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+/* temaside: rangert liste */
+.hero-single { grid-template-columns: 1fr; }
+.rank-list { display: grid; gap: 18px; }
+.rank-item {
+  display: grid;
+  grid-template-columns: 44px 180px 1fr;
+  gap: 20px;
+  align-items: start;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px;
+}
+.rank-nr {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  color: var(--mauve);
+  line-height: 1;
+}
+.rank-img img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3px; width: 100%; }
+.rank-main h3 { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 20px; margin-bottom: 8px; }
+.rank-main h3 a { color: var(--text); text-decoration: none; }
+.rank-main h3 a:hover { color: var(--mauve-dark); }
+.rank-rating { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; color: var(--dark); margin-bottom: 12px; }
+.rank-quote { font-size: 15px; color: var(--dark); border-left: 3px solid var(--mauve-light); padding-left: 12px; margin-bottom: 14px; }
+.rank-quote cite { display: block; font-style: normal; font-size: 13px; margin-top: 4px; }
+.rank-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.rank-links .btn { padding: 9px 16px; font-size: 13px; }
+@media (max-width: 700px) {
+  .rank-item { grid-template-columns: 32px 1fr; }
+  .rank-img { grid-column: 2; max-width: 200px; }
+  .rank-main { grid-column: 1 / -1; }
+}
+
+/* produktside */
+.crumbs { font-size: 14px; color: var(--dark); margin-bottom: 14px; }
+.crumbs span { margin: 0 4px; }
+.phero {
+  background: var(--beige);
+  padding: clamp(36px, 5vw, 64px) clamp(16px, 4vw, 48px);
+}
+.phero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1.3fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+.phero-img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 10px 30px rgba(35, 35, 35, .10);
+}
+.phero h1 { font-size: clamp(26px, 3.6vw, 38px); margin-bottom: 18px; }
+.phero-price { color: var(--dark); font-size: 16px; margin-bottom: 20px; }
+.phero-trust { color: var(--dark); font-size: 14px; margin-top: 16px; }
+.tilbake { margin-top: 32px; font-size: 15px; }
+@media (max-width: 1000px) {
+  .phero-inner { grid-template-columns: 220px 1fr; }
+  .phero-inner .breakdown-card { grid-column: 1 / -1; }
+}
+@media (max-width: 620px) {
+  .phero-inner { grid-template-columns: 1fr; }
+  .phero-img { max-width: 260px; }
+}
+
+/* filter */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+.chip {
+  font-size: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.chip:hover { border-color: var(--mauve); color: var(--mauve-dark); }
+.chip.active { background: var(--mauve); border-color: var(--mauve); color: #fff; }
+#sok {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  min-width: 180px;
+  flex: 1;
+  max-width: 280px;
+  background: var(--white);
+}
+#sok:focus { outline: none; border-color: var(--mauve); }
+.filter-status { font-size: 14px; color: var(--dark); min-height: 22px; margin-bottom: 8px; }
+
+/* veggen: fade over siste parti så bunnen aldri slutter hardt, knappen oppå */
+.wall-wrap { position: relative; }
+.wall-wrap.has-more::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 240px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 82%);
+  pointer-events: none;
+}
+.mer-wrap {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  text-align: center;
+  z-index: 2;
+}
+.mer-wrap .btn { cursor: pointer; }
+
+/* om flor */
+.about { max-width: 720px; }
+.about p { margin-bottom: 18px; }
+.trust { list-style: none; display: grid; gap: 8px; }
+.trust li { padding-left: 28px; position: relative; }
+.trust li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 7px;
+  width: 14px; height: 14px;
+  background: var(--mauve);
+  border-radius: 50%;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="black" d="M6.5 12.2 2.8 8.5l1.4-1.4 2.3 2.3 5.3-5.3 1.4 1.4z"/></svg>') center / contain no-repeat;
+}
+
+/* faq */
+details { border-bottom: 1px solid var(--border); padding: 16px 0; max-width: 720px; }
+summary { cursor: pointer; font-weight: 500; }
+summary:hover { color: var(--mauve-dark); }
+details p { margin-top: 10px; color: var(--dark); font-size: 16px; }
+
+/* footer */
+.site-footer {
+  background: var(--text);
+  color: #d9d4cf;
+  text-align: center;
+  padding: 44px 20px;
+  font-size: 15px;
+}
+.site-footer a { color: #fff; }
+.site-footer p { max-width: 640px; margin: 0 auto 14px; }
+.site-footer .updated { font-size: 13px; color: #9a948e; margin-top: 10px; }
+
+/* mobil: hero stables, fordeling under */
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-sub { max-width: none; }
+}
+@media (max-width: 480px) {
+  .hero-cta .btn { flex: 1; }
+  #sok { max-width: none; }
+}

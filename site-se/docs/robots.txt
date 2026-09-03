@@ -1,5 +1,5 @@
-# floromtaler — kundeomtaler av Flor (https://florworks.no)
-# Søkemotorer og AI-crawlere er velkomne. Se også /llms.txt og /llms-full.txt.
+# florrecensioner — kundrecensioner av Flor (https://florworks.se)
+# Sökmotorer och AI-crawlers är välkomna. Se även /llms.txt och /llms-full.txt.
 
 User-agent: *
 Allow: /
@@ -37,4 +37,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://floromtaler.no/sitemap.xml
+Sitemap: https://florrecensioner.se/sitemap.xml

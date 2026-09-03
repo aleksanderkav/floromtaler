@@ -24,14 +24,27 @@ DOCS = os.path.join(BASE, "docs")
 
 # ---- lanseringsbrytere -------------------------------------------------------
 NOINDEX = False         # lansert på eget domene 2026-09-03
-BASE_URL = "https://floromtaler.no"   # eget domene, apex er kanonisk (www 308-redirigeres)
+
+# To selvstendige nettsteder, ett per marked. Norsk på floromtaler.no, svensk på
+# florrecensioner.se. Egen ccTLD er hele poenget: et .no-domene forteller Google at
+# innholdet hører til Norge, og det drar ned på brede svenske søk. Sidene er
+# oversettelser av hverandre og bindes sammen med hreflang begge veier.
+BASE_URL_NB = "https://floromtaler.no"      # apex er kanonisk (www 308-redirigeres)
+BASE_URL_SV = "https://florrecensioner.se"  # samme oppsett
+BASE_URL = BASE_URL_NB                      # settes per nettsted av set_site()
+DOCS_NB = DOCS                              # docs/        -> Vercel-prosjekt floromtaler
+DOCS_SV = os.path.join(BASE, "site-se", "docs")  # -> Vercel-prosjekt florrecensioner
 SITE_TITLE = "Kundeomtaler av Flor arbeidsklær"
+SITE_TITLE_SV = "Kundrecensioner av Flor arbetskläder"
 SHOP_URL = "https://florworks.no"
 SHOP_URL_SE = "https://florworks.se"
-UTM = "utm_source=floromtaler&utm_medium=referral&utm_campaign=omtaleside"
+UTM_NB = "utm_source=floromtaler&utm_medium=referral&utm_campaign=omtaleside"
+UTM_SV = "utm_source=florrecensioner&utm_medium=referral&utm_campaign=recensionssida"
+UTM = UTM_NB            # settes per nettsted av set_site()
 WALL_BATCH = 30         # antall omtaler synlig på forsiden før «Vis flere»
 MIN_PRODUCT_REVIEWS = 5 # tekstomtaler som kreves for egen produktside
 THEME_SLUG = "beste-arbeidsbukse-dame"
+THEME_SLUG_SV = "basta-arbetsbyxan-dam"
 
 # ---- CSV-kolonnemapping (fleksibel: første treff vinner) ---------------------
 COLS = {
@@ -117,7 +130,35 @@ L_NB = {
                     '<a href="https://www.lipscore.com" rel="noopener">Lipscore</a> fra verifiserte kjøp og '
                     'gjengis uredigert.</p>'),
     "updated": "Sist oppdatert",
-    "lang_switch": '<a class="lang-link" href="se/" hreflang="sv">Svenska</a>',
+    "lang_switch": '<a class="lang-link" href="https://florrecensioner.se/" hreflang="sv">Svenska</a>',
+    # produktside
+    "p_crumb": "Alle omtaler av Flor",
+    "p_h1": "Omtaler av {t}",
+    "p_count": "av 5, fra {n} verifiserte kjøp",
+    "p_price": "{kr} kr hos florworks.no",
+    "p_cta": "Se produktet hos florworks.no",
+    "p_trust": "Fri frakt over 1 999 kr · Gratis bytte · 14 dagers angrerett",
+    "p_h2": "{n} omtaler av {t}",
+    "p_sub": "Fra verifiserte kjøp via Lipscore, nyeste først. Samlet vurdering {a} av 5 fra {n} kjøp.",
+    "p_back": "← Se alle omtaler av Flor",
+    "p_title": "{t} — omtaler fra {n} verifiserte kjøp ({a} av 5)",
+    "p_desc": ("Les {c} kundeomtaler av {t} fra Flor. Samlet vurdering {a} av 5 stjerner "
+               "fra {n} verifiserte kjøp via Lipscore."),
+    # temaside
+    "t_slug": THEME_SLUG,
+    "t_crumb": "Beste arbeidsbukse for damer",
+    "t_h1": "Beste arbeidsbukse for damer — rangert av kundene",
+    "t_sub": ("{k} buksemodeller fra Flor, rangert etter {n} verifiserte kundevurderinger samlet "
+              "inn via Lipscore. Rangeringen beregnes av snittvurdering og antall vurderinger, "
+              "oppdatert {d}."),
+    "t_rating": "{a} av 5 · {n} vurderinger",
+    "t_cite": "verifisert kjøp",
+    "t_see": "Se produktet",
+    "t_read": "Les alle {n} omtalene",
+    "t_title": "Beste arbeidsbukse for damer {y} — rangert av {n} kunder",
+    "t_desc": ("Hvilken arbeidsbukse for damer er best? {k} buksemodeller fra Flor rangert etter "
+               "{n} verifiserte kundevurderinger via Lipscore."),
+    "t_schema": "Beste arbeidsbukse for damer {y}, rangert av kundene",
 }
 
 L_SV = {
@@ -146,7 +187,7 @@ L_SV = {
     "products_h2": "Mest recenserade produkter",
     "ratings_word": "betyg|betyg",
     "see_product": "Se produkten",
-    "read_all_fmt": "",
+    "read_all_fmt": "Läs alla {n} recensioner →",
     "wall_h2": "Alla recensioner",
     "wall_sub": "{n} recensioner med text, senaste först.",
     "wall_silent": " Dessutom har {n} kunder lämnat stjärnbetyg utan text.",
@@ -193,7 +234,35 @@ L_SV = {
                     'Recensionerna samlas in av <a href="https://www.lipscore.com" rel="noopener">Lipscore</a> '
                     'från verifierade köp och återges oredigerade.</p>'),
     "updated": "Senast uppdaterad",
-    "lang_switch": '<a class="lang-link" href="../" hreflang="nb">Norsk</a>',
+    "lang_switch": '<a class="lang-link" href="https://floromtaler.no/" hreflang="nb">Norsk</a>',
+    # produktsida
+    "p_crumb": "Alla recensioner av Flor",
+    "p_h1": "Recensioner av {t}",
+    "p_count": "av 5, från {n} verifierade köp",
+    "p_price": "{kr} kr hos florworks.se",
+    "p_cta": "Se produkten hos florworks.se",
+    "p_trust": "Fri frakt över 1 999 kr · Byte via kontakt@florworks.no · 14 dagars ångerrätt",
+    "p_h2": "{n} recensioner av {t}",
+    "p_sub": ("Från verifierade köp via Lipscore, senaste först. Samlat betyg {a} av 5 från {n} köp. "
+              "Recensionerna visas på originalspråket (norska)."),
+    "p_back": "← Se alla recensioner av Flor",
+    "p_title": "{t} — recensioner från {n} verifierade köp ({a} av 5)",
+    "p_desc": ("Läs {c} kundrecensioner av {t} från Flor. Samlat betyg {a} av 5 stjärnor "
+               "från {n} verifierade köp via Lipscore."),
+    # temasida
+    "t_slug": THEME_SLUG_SV,
+    "t_crumb": "Bästa arbetsbyxan för dam",
+    "t_h1": "Bästa arbetsbyxan för dam — rankad av kunderna",
+    "t_sub": ("{k} byxmodeller från Flor, rankade efter {n} verifierade kundbetyg insamlade via "
+              "Lipscore. Rankningen beräknas på snittbetyg och antal betyg, uppdaterad {d}."),
+    "t_rating": "{a} av 5 · {n} betyg",
+    "t_cite": "verifierat köp",
+    "t_see": "Se produkten",
+    "t_read": "Läs alla {n} recensionerna",
+    "t_title": "Bästa arbetsbyxan för dam {y} — rankad av {n} kunder",
+    "t_desc": ("Vilken arbetsbyxa för dam är bäst? {k} byxmodeller från Flor rankade efter "
+               "{n} verifierade kundbetyg via Lipscore."),
+    "t_schema": "Bästa arbetsbyxan för dam {y}, rankad av kunderna",
 }
 
 CUR = L_NB
@@ -212,6 +281,28 @@ def set_lang(L):
     global CUR, MARKET
     CUR = L
     MARKET = M_NB if L["lang"] == "nb" else M_SV
+
+
+def set_site(L):
+    """Språk, marked, kanonisk domene og utmappe henger sammen. Sett dem ett sted."""
+    global BASE_URL, DOCS, UTM
+    set_lang(L)
+    nb = L["lang"] == "nb"
+    BASE_URL = BASE_URL_NB if nb else BASE_URL_SV
+    DOCS = DOCS_NB if nb else DOCS_SV
+    UTM = UTM_NB if nb else UTM_SV
+
+
+def alternates_for(slug_nb, slug_sv):
+    """hreflang på tvers av domenene. Utelates når siden bare finnes i ett marked."""
+    alts = []
+    if slug_nb is not None:
+        alts.append(("nb", f"{BASE_URL_NB}/{slug_nb}"))
+    if slug_sv is not None:
+        alts.append(("sv", f"{BASE_URL_SV}/{slug_sv}"))
+    if slug_nb is not None:
+        alts.append(("x-default", f"{BASE_URL_NB}/{slug_nb}"))
+    return alts
 
 
 def market_product(p):
@@ -249,7 +340,11 @@ def parse_date(raw):
 
 
 def fmt_date(d):
-    return f"{d.day}. {CUR['months'][d.month - 1]} {d.year}" if d else ""
+    """Norsk skriver «3. september 2026», svensk «3 september 2026» uten punktum."""
+    if not d:
+        return ""
+    punktum = "." if CUR["lang"] == "nb" else ""
+    return f"{d.day}{punktum} {CUR['months'][d.month - 1]} {d.year}"
 
 
 def no_num(x, nd=1):
@@ -396,6 +491,15 @@ def load_market_se(by_handle):
     M_SV["titles"] = {norm(p["title"]): se[h]["title"] for h, p in by_handle.items() if h in se}
 
 
+def slugify(tekst):
+    """URL-slug fra en produkttittel. Brukes til svenske slugger, som må komme fra det
+    svenske produktnavnet: handlene er felles mellom butikkene, navnene er ikke."""
+    t = unicodedata.normalize("NFKD", (tekst or "").lower().strip())
+    t = "".join(c for c in t if not unicodedata.combining(c))
+    t = t.replace("ø", "o").replace("æ", "ae").replace("ß", "ss")
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
+
+
 def slug_of(handle, opptatt):
     """URL-slug uten Shopifys årsprefiks; faller tilbake til full handle ved kollisjon."""
     slug = re.sub(r"^(19|20)\d{2}-", "", handle)
@@ -416,6 +520,21 @@ def product_pages_data(votes, by_handle):
             slug = slug_of(h, opptatt)
             opptatt.add(slug)
             sider[h] = {"votes": rs, "texts": tekster, "p": by_handle[h], "slug": slug}
+    # Svensk slug fra det svenske produktnavnet. Produkter som ikke selges i SE får
+    # None og utelates fra det svenske nettstedet, i stedet for å få en side som
+    # lenker til noe kunden ikke kan kjøpe.
+    se = M_SV["products"] or {}
+    opptatt_sv = {THEME_SLUG_SV}
+    for h, d in sider.items():
+        p_se = se.get(h)
+        if not p_se:
+            d["slug_sv"] = None
+            continue
+        sv = slugify(p_se["title"]) or d["slug"]
+        if sv in opptatt_sv:
+            sv = d["slug"]
+        opptatt_sv.add(sv)
+        d["slug_sv"] = sv
     return sider
 
 
@@ -605,8 +724,8 @@ def page_shell(*, title, desc, path, body, prefix="", schema="", og_image=None, 
 
 # ---- produktsider (norsk) ----------------------------------------------------
 
-def product_schema(h, d):
-    p, rs, tekster = d["p"], d["votes"], d["texts"]
+def product_schema(h, d, p, slug, shop, valuta, site_title):
+    rs, tekster = d["votes"], d["texts"]
     avg = sum(r["rating"] for r in rs) / len(rs)
     reviews = []
     for r in tekster[:10]:
@@ -620,26 +739,30 @@ def product_schema(h, d):
     data = {"@context": "https://schema.org", "@type": "Product",
             "name": p["title"], "image": p["image"],
             "brand": {"@type": "Brand", "name": "Flor"},
-            "url": f"{BASE_URL}/{d['slug']}/",
+            "url": f"{BASE_URL}/{slug}/",
             "aggregateRating": {"@type": "AggregateRating", "ratingValue": round(avg, 2),
                                 "ratingCount": len(rs), "reviewCount": len(tekster),
                                 "bestRating": 5, "worstRating": 1},
             "review": reviews}
     if p.get("price"):
-        data["offers"] = {"@type": "Offer", "price": p["price"], "priceCurrency": "NOK",
+        data["offers"] = {"@type": "Offer", "price": p["price"], "priceCurrency": valuta,
                           "availability": "https://schema.org/InStock",
-                          "url": f"{SHOP_URL}/products/{h}"}
+                          "url": f"{shop}/products/{h}"}
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList",
               "itemListElement": [
-                  {"@type": "ListItem", "position": 1, "name": SITE_TITLE, "item": f"{BASE_URL}/"},
-                  {"@type": "ListItem", "position": 2, "name": p["title"], "item": f"{BASE_URL}/{d['slug']}/"}]}
+                  {"@type": "ListItem", "position": 1, "name": site_title, "item": f"{BASE_URL}/"},
+                  {"@type": "ListItem", "position": 2, "name": p["title"], "item": f"{BASE_URL}/{slug}/"}]}
     return ('<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
             '<script type="application/ld+json">' + json.dumps(crumbs, ensure_ascii=False) + '</script>')
 
 
-def build_product_page(h, d, sample):
-    set_lang(L_NB)
-    p, rs, tekster = d["p"], d["votes"], d["texts"]
+def build_product_page(h, d, sample, L):
+    set_site(L)
+    nb = L["lang"] == "nb"
+    p = d["p"] if nb else (market_product(d["p"]) or d["p"])
+    rs, tekster = d["votes"], d["texts"]
+    slug = d["slug"] if nb else d["slug_sv"]
+    shop = SHOP_URL if nb else SHOP_URL_SE
     avg = sum(r["rating"] for r in rs) / len(rs)
     avg_str = no_num(avg)
     resolve = lambda r: None
@@ -647,36 +770,36 @@ def build_product_page(h, d, sample):
     pris = ""
     if p.get("price"):
         kr = f'{float(p["price"]):,.0f}'.replace(",", " ")
-        pris = f'<p class="phero-price">{kr} kr hos florworks.no</p>'
+        pris = f'<p class="phero-price">{CUR["p_price"].format(kr=kr)}</p>'
     body = f"""
 <main>
 <section class="phero">
   <div class="phero-inner">
-    <a class="phero-img" href="{SHOP_URL}/products/{h}?{UTM}" rel="noopener">
+    <a class="phero-img" href="{shop}/products/{h}?{UTM}" rel="noopener">
       <img src="{p["image"]}&width=640" alt="{esc(p["title"])}" width="640" height="800">
     </a>
     <div class="phero-main">
-      <nav class="crumbs"><a href="../">Alle omtaler av Flor</a> <span aria-hidden="true">/</span> {esc(p["title"])}</nav>
-      <h1>Omtaler av {esc(p["title"])}</h1>
+      <nav class="crumbs"><a href="../">{CUR["p_crumb"]}</a> <span aria-hidden="true">/</span> {esc(p["title"])}</nav>
+      <h1>{esc(CUR["p_h1"].format(t=p["title"]))}</h1>
       <div class="hero-rating">
         <span class="hero-avg">{avg_str}</span>
-        <span class="hero-stars">{stars_svg(avg, 24)}<span class="hero-count">av 5, fra {len(rs)} verifiserte kjøp</span></span>
+        <span class="hero-stars">{stars_svg(avg, 24)}<span class="hero-count">{CUR["p_count"].format(n=len(rs))}</span></span>
       </div>
       {pris}
       <div class="hero-cta">
-        <a class="btn btn-primary" href="{SHOP_URL}/products/{h}?{UTM}" rel="noopener">Se produktet hos florworks.no</a>
+        <a class="btn btn-primary" href="{shop}/products/{h}?{UTM}" rel="noopener">{CUR["p_cta"]}</a>
       </div>
-      <p class="phero-trust">Fri frakt over 1 999 kr · Gratis bytte · 14 dagers angrerett</p>
+      <p class="phero-trust">{CUR["p_trust"]}</p>
     </div>
     {breakdown_html(rs, clickable=False)}
   </div>
 </section>
 
 <section class="section">
-  <h2>{len(tekster)} omtaler av {esc(p["title"])}</h2>
-  <p class="section-sub">Fra verifiserte kjøp via Lipscore, nyeste først. Samlet vurdering {avg_str} av 5 fra {len(rs)} kjøp.</p>
+  <h2>{esc(CUR["p_h2"].format(n=len(tekster), t=p["title"]))}</h2>
+  <p class="section-sub">{CUR["p_sub"].format(a=avg_str, n=len(rs))}</p>
   <div class="masonry m3" id="palle">{cards}</div>
-  <p class="tilbake"><a href="../">← Se alle omtaler av Flor</a></p>
+  <p class="tilbake"><a href="../">{CUR["p_back"]}</a></p>
 </section>
 </main>
 
@@ -686,12 +809,15 @@ def build_product_page(h, d, sample):
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () {{ sjekkKlamp('#palle'); }});
 }})();
 </script>"""
-    title = f'{p["title"]} — omtaler fra {len(rs)} verifiserte kjøp ({avg_str} av 5)'
-    desc = (f'Les {len(tekster)} kundeomtaler av {p["title"]} fra Flor. '
-            f'Samlet vurdering {avg_str} av 5 stjerner fra {len(rs)} verifiserte kjøp via Lipscore.')
-    return page_shell(title=title, desc=desc, path=f"{d['slug']}/", body=body, prefix="../",
-                      schema="" if sample else product_schema(h, d),
-                      og_image=p["image"], sample=sample)
+    title = CUR["p_title"].format(t=p["title"], n=len(rs), a=avg_str)
+    desc = CUR["p_desc"].format(c=len(tekster), t=p["title"], a=avg_str, n=len(rs))
+    schema = "" if sample else product_schema(
+        h, d, p, slug, shop, "NOK" if nb else "SEK", SITE_TITLE if nb else SITE_TITLE_SV)
+    return page_shell(title=title, desc=desc, path=f"{slug}/", body=body, prefix="../",
+                      schema=schema, og_image=p["image"], sample=sample,
+                      alternates=alternates_for(
+                          f"{d['slug']}/", f"{d['slug_sv']}/" if d.get("slug_sv") else None),
+                      shop_href=f"{shop}?{UTM}", nav_extra=CUR["lang_switch"] if d.get("slug_sv") else "")
 
 
 # ---- temaside: beste arbeidsbukse dame (norsk) -------------------------------
@@ -705,23 +831,31 @@ def bukse_ranking(sider):
     return sorted(kandidater, key=score, reverse=True)
 
 
-def build_theme_page(sider, sample):
-    set_lang(L_NB)
-    ranked = bukse_ranking(sider)
+def build_theme_page(sider, sample, L):
+    set_site(L)
+    nb = L["lang"] == "nb"
+    shop = SHOP_URL if nb else SHOP_URL_SE
+    # Rangeringen bygger på den norske tittelen, som er produktets identitet på tvers
+    # av butikkene. Da blir de to temasidene ekte oversettelser av hverandre, slik
+    # hreflang forutsetter, og ikke to ulike lister.
+    ranked = [(h, d) for h, d in bukse_ranking(sider) if nb or d.get("slug_sv")]
     if len(ranked) < 3:
         return None
     tot_votes = sum(len(d["votes"]) for _, d in ranked)
     aar = date.today().year
     rows, items = [], []
     for i, (h, d) in enumerate(ranked, 1):
-        p, rs, tekster = d["p"], d["votes"], d["texts"]
+        p = d["p"] if nb else (market_product(d["p"]) or d["p"])
+        rs, tekster = d["votes"], d["texts"]
+        slug = d["slug"] if nb else d["slug_sv"]
         avg = sum(r["rating"] for r in rs) / len(rs)
         sitat = max((r for r in tekster if r["rating"] >= 4), key=lambda r: min(len(r["text"]), 180),
                     default=None)
         sitat_html = ""
         if sitat:
             kort = sitat["text"] if len(sitat["text"]) <= 180 else sitat["text"][:177].rstrip() + "…"
-            sitat_html = f'<blockquote class="rank-quote">«{esc(kort)}»<cite>— {esc(sitat["name"])}, verifisert kjøp</cite></blockquote>'
+            sitat_html = (f'<blockquote class="rank-quote">«{esc(kort)}»'
+                          f'<cite>— {esc(sitat["name"])}, {CUR["t_cite"]}</cite></blockquote>')
         pris = ""
         if p.get("price"):
             kr = f'{float(p["price"]):,.0f}'.replace(",", " ")
@@ -729,26 +863,26 @@ def build_theme_page(sider, sample):
         rows.append(f"""
   <article class="rank-item">
     <span class="rank-nr">{i}</span>
-    <a class="rank-img" href="{d['slug']}/"><img src="{p['image']}&width=480" alt="{esc(p['title'])}" loading="lazy" width="480" height="600"></a>
+    <a class="rank-img" href="{slug}/"><img src="{p['image']}&width=480" alt="{esc(p['title'])}" loading="lazy" width="480" height="600"></a>
     <div class="rank-main">
-      <h3><a href="{d['slug']}/">{esc(p['title'])}</a></h3>
-      <div class="rank-rating">{stars_svg(avg, 16)}<span>{no_num(avg)} av 5 · {len(rs)} vurderinger</span>{pris}</div>
+      <h3><a href="{slug}/">{esc(p['title'])}</a></h3>
+      <div class="rank-rating">{stars_svg(avg, 16)}<span>{CUR['t_rating'].format(a=no_num(avg), n=len(rs))}</span>{pris}</div>
       {sitat_html}
       <div class="rank-links">
-        <a class="btn btn-primary" href="{SHOP_URL}/products/{h}?{UTM}" rel="noopener">Se produktet</a>
-        <a class="btn btn-ghost" href="{d['slug']}/">Les alle {len(tekster)} omtalene</a>
+        <a class="btn btn-primary" href="{shop}/products/{h}?{UTM}" rel="noopener">{CUR['t_see']}</a>
+        <a class="btn btn-ghost" href="{slug}/">{CUR['t_read'].format(n=len(tekster))}</a>
       </div>
     </div>
   </article>""")
         items.append({"@type": "ListItem", "position": i,
                       "item": {"@type": "Product", "name": p["title"], "image": p["image"],
-                               "url": f"{BASE_URL}/{d['slug']}/",
+                               "url": f"{BASE_URL}/{slug}/",
                                "aggregateRating": {"@type": "AggregateRating",
                                                    "ratingValue": round(avg, 2),
                                                    "ratingCount": len(rs), "bestRating": 5}}})
     schema = ('<script type="application/ld+json">'
               + json.dumps({"@context": "https://schema.org", "@type": "ItemList",
-                            "name": f"Beste arbeidsbukse for damer {aar}, rangert av kundene",
+                            "name": CUR["t_schema"].format(y=aar),
                             "itemListElement": items}, ensure_ascii=False)
               + '</script>')
     i_dag = fmt_date(date.today())
@@ -757,24 +891,23 @@ def build_theme_page(sider, sample):
 <section class="hero">
   <div class="hero-inner hero-single">
     <div class="hero-main">
-      <nav class="crumbs"><a href="../">Alle omtaler av Flor</a> <span aria-hidden="true">/</span> Beste arbeidsbukse for damer</nav>
-      <h1>Beste arbeidsbukse for damer — rangert av kundene</h1>
-      <p class="hero-sub">{len(ranked)} buksemodeller fra Flor, rangert etter {tot_votes} verifiserte
-      kundevurderinger samlet inn via Lipscore. Rangeringen beregnes av snittvurdering og antall
-      vurderinger, oppdatert {i_dag}.</p>
+      <nav class="crumbs"><a href="../">{CUR['p_crumb']}</a> <span aria-hidden="true">/</span> {CUR['t_crumb']}</nav>
+      <h1>{CUR['t_h1']}</h1>
+      <p class="hero-sub">{CUR['t_sub'].format(k=len(ranked), n=tot_votes, d=i_dag)}</p>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="rank-list">{''.join(rows)}</div>
-  <p class="tilbake"><a href="../">← Se alle omtaler av Flor</a></p>
+  <p class="tilbake"><a href="../">{CUR['p_back']}</a></p>
 </section>
 </main>"""
-    title = f"Beste arbeidsbukse for damer {aar} — rangert av {tot_votes} kunder"
-    desc = (f"Hvilken arbeidsbukse for damer er best? {len(ranked)} buksemodeller fra Flor rangert etter "
-            f"{tot_votes} verifiserte kundevurderinger via Lipscore.")
-    return page_shell(title=title, desc=desc, path=f"{THEME_SLUG}/", body=body, prefix="../",
-                      schema="" if sample else schema, sample=sample)
+    title = CUR["t_title"].format(y=aar, n=tot_votes)
+    desc = CUR["t_desc"].format(k=len(ranked), n=tot_votes)
+    return page_shell(title=title, desc=desc, path=f"{CUR['t_slug']}/", body=body, prefix="../",
+                      schema="" if sample else schema, sample=sample,
+                      alternates=alternates_for(f"{THEME_SLUG}/", f"{THEME_SLUG_SV}/"),
+                      shop_href=f"{shop}?{UTM}", nav_extra=CUR["lang_switch"])
 
 
 # ---- forside (nb + sv) -------------------------------------------------------
@@ -818,8 +951,10 @@ def product_cards_html(votes, by_handle, by_title, sider, shop, internal):
             pris = f'<span class="p-price">{kr} kr</span>'
         intern = ""
         if internal and h in sider and CUR["read_all_fmt"]:
-            intern = (f'<a class="pcard-reviews" href="{sider[h]["slug"]}/">'
-                      f'{CUR["read_all_fmt"].format(n=len(sider[h]["texts"]))}</a>')
+            slug_i = sider[h]["slug"] if CUR["lang"] == "nb" else sider[h].get("slug_sv")
+            if slug_i:
+                intern = (f'<a class="pcard-reviews" href="{slug_i}/">'
+                          f'{CUR["read_all_fmt"].format(n=len(sider[h]["texts"]))}</a>')
         cards.append(
             f'<div class="pcard">'
             f'<a class="pcard-main" href="{shop}/products/{h}?{UTM}" rel="noopener">'
@@ -832,12 +967,12 @@ def product_cards_html(votes, by_handle, by_title, sider, shop, internal):
 
 
 def build_index(votes, by_handle, by_title, sider, sample, L):
-    set_lang(L)
+    set_site(L)
     nb = L["lang"] == "nb"
     shop = SHOP_URL if nb else SHOP_URL_SE
     shop2 = SHOP_URL_SE if nb else SHOP_URL
-    path = "" if nb else "se/"
-    prefix = "" if nb else "../"
+    path = ""
+    prefix = ""
     n_votes = len(votes)
     avg = sum(r["rating"] for r in votes) / n_votes if n_votes else 0
     avg_str = no_num(avg)
@@ -846,8 +981,10 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
     n_stille = n_votes - n_cards
 
     def resolve(r):
-        if nb and r["handle"] and r["handle"] in sider:
-            return (f'{sider[r["handle"]]["slug"]}/', True)
+        if r["handle"] and r["handle"] in sider:
+            intern_slug = sider[r["handle"]]["slug"] if nb else sider[r["handle"]].get("slug_sv")
+            if intern_slug:
+                return (f'{intern_slug}/', True)
         p = by_handle.get(r["handle"]) or by_title.get(norm(r["product"]))
         if p and market_product(p):     # ikke lenk til produkter markedet ikke selger
             return (f'{shop}/products/{p["handle"]}?{UTM}', False)
@@ -858,7 +995,7 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
         featured = sorted(cards, key=lambda r: (r["rating"], len(r["text"])), reverse=True)[:12]
     feat_html = featured_columns(featured, resolve)
     wall_html = "".join(review_card(r, resolve, hidden=(i >= WALL_BATCH)) for i, r in enumerate(cards))
-    prods_html = product_cards_html(votes, by_handle, by_title, sider, shop, internal=nb)
+    prods_html = product_cards_html(votes, by_handle, by_title, sider, shop, internal=True)
     breakdown = breakdown_html(votes)
     stille = L["wall_silent"].format(n=n_stille) if n_stille > 0 else ""
     faq_html = "".join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in L["faq"])
@@ -990,7 +1127,7 @@ def build_index(votes, by_handle, by_title, sider, sample, L):
         title = f"Kundrecensioner av Flor arbetskläder — {avg_str} av 5 från {n_votes} verifierade köp"
         desc = (f"Läs {n_cards} kundrecensioner av Flor arbetskläder för damer. Samlat betyg {avg_str} av 5 "
                 f"stjärnor från {n_votes} verifierade köp, insamlade via Lipscore.")
-    alternates = [("nb", f"{BASE_URL}/"), ("sv", f"{BASE_URL}/se/"), ("x-default", f"{BASE_URL}/")]
+    alternates = alternates_for("", "")
     return page_shell(title=title, desc=desc, path=path, body=body, prefix=prefix,
                       schema="" if sample else index_schema(votes, n_cards, avg, L, shop),
                       sample=sample, alternates=alternates,
@@ -1011,9 +1148,13 @@ def build_robots():
             "anthropic-ai", "PerplexityBot", "Google-Extended", "Applebot-Extended",
             "meta-externalagent", "CCBot"]
     ai = "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots)
-    return (f"# floromtaler — kundeomtaler av Flor (florworks.no)\n"
+    nb = CUR["lang"] == "nb"
+    topp = (f"# floromtaler — kundeomtaler av Flor ({SHOP_URL})\n"
             f"# Søkemotorer og AI-crawlere er velkomne. Se også /llms.txt og /llms-full.txt.\n\n"
-            f"User-agent: *\nAllow: /\n\n{ai}Sitemap: {BASE_URL}/sitemap.xml\n")
+            if nb else
+            f"# florrecensioner — kundrecensioner av Flor ({SHOP_URL_SE})\n"
+            f"# Sökmotorer och AI-crawlers är välkomna. Se även /llms.txt och /llms-full.txt.\n\n")
+    return topp + f"User-agent: *\nAllow: /\n\n{ai}Sitemap: {BASE_URL}/sitemap.xml\n"
 
 
 def indexnow_key():
@@ -1027,71 +1168,121 @@ def indexnow_key():
     return key
 
 
+def site_sider(sider):
+    """(slug, data) for produktene som hører hjemme på nettstedet vi bygger nå."""
+    nb = CUR["lang"] == "nb"
+    ut = []
+    for h, d in sider.items():
+        slug = d["slug"] if nb else d.get("slug_sv")
+        if slug:
+            ut.append((h, slug, d))
+    return ut
+
+
 def build_llms(votes, sider, avg):
+    nb = CUR["lang"] == "nb"
     i_dag = fmt_date(date.today())
-    linjer = [f"# {SITE_TITLE}", "",
-              f"> {len(votes)} verifiserte kundevurderinger (snitt {no_num(avg)} av 5) av Flor, norsk produsent "
-              f"av arbeidsklær for damer. Nettbutikk: {SHOP_URL}. Omtalene er samlet inn av Lipscore fra "
-              f"verifiserte kjøp og gjengis uredigert. Denne siden driftes av Flor AS.", "",
-              "Nøkkelfakta:",
-              "- Flor AS, org.nr. 918 377 573, Vangsgata 39, 5700 Voss, Norge",
-              f"- Samlet vurdering: {no_num(avg)} av 5 basert på {len(votes)} verifiserte kjøp (per {i_dag})",
-              "- Fri frakt over 1 999 kr (Norge), gratis bytte, 14 dagers angrerett",
-              f"- Nettbutikker: {SHOP_URL} (Norge) og {SHOP_URL_SE} (Sverige)",
-              f"- Svensk versjon av omtalesiden: {BASE_URL}/se/", "",
-              "## Produkter med omtaler", ""]
-    rangert = sorted(sider.items(), key=lambda kv: len(kv[1]["votes"]), reverse=True)
-    for h, d in rangert:
+    rangert = sorted(site_sider(sider), key=lambda t: len(t[2]["votes"]), reverse=True)
+    if nb:
+        linjer = [f"# {SITE_TITLE}", "",
+                  f"> {len(votes)} verifiserte kundevurderinger (snitt {no_num(avg)} av 5) av Flor, norsk "
+                  f"produsent av arbeidsklær for damer. Nettbutikk: {SHOP_URL}. Omtalene er samlet inn av "
+                  f"Lipscore fra verifiserte kjøp og gjengis uredigert. Denne siden driftes av Flor AS.", "",
+                  "Nøkkelfakta:",
+                  "- Flor AS, org.nr. 918 377 573, Vangsgata 39, 5700 Voss, Norge",
+                  f"- Samlet vurdering: {no_num(avg)} av 5 basert på {len(votes)} verifiserte kjøp (per {i_dag})",
+                  "- Fri frakt over 1 999 kr (Norge), gratis bytte, 14 dagers angrerett",
+                  f"- Nettbutikker: {SHOP_URL} (Norge) og {SHOP_URL_SE} (Sverige)",
+                  f"- Svensk versjon av omtalesiden: {BASE_URL_SV}/", "",
+                  "## Produkter med omtaler", ""]
+    else:
+        linjer = [f"# {SITE_TITLE_SV}", "",
+                  f"> {len(votes)} verifierade kundbetyg (snitt {no_num(avg)} av 5) av Flor, norsk "
+                  f"tillverkare av arbetskläder för damer. Webbutik: {SHOP_URL_SE}. Recensionerna samlas in "
+                  f"av Lipscore från verifierade köp och återges oredigerade, på originalspråket (norska). "
+                  f"Sidan drivs av Flor AS.", "",
+                  "Nyckelfakta:",
+                  "- Flor AS, org.nr 918 377 573, Vangsgata 39, 5700 Voss, Norge",
+                  f"- Samlat betyg: {no_num(avg)} av 5 baserat på {len(votes)} verifierade köp (per {i_dag})",
+                  "- Fri frakt vid köp över 1 999 kr, 14 dagars ångerrätt enligt lag",
+                  f"- Webbutiker: {SHOP_URL_SE} (Sverige) och {SHOP_URL} (Norge)",
+                  f"- Norsk version av recensionssidan: {BASE_URL_NB}/", "",
+                  "## Produkter med recensioner", ""]
+    for h, slug, d in rangert:
+        pp = d["p"] if nb else (M_SV["products"] or {}).get(h, d["p"])
         a = sum(r["rating"] for r in d["votes"]) / len(d["votes"])
-        linjer.append(f"- [{d['p']['title']}]({BASE_URL}/{d['slug']}/): {no_num(a)} av 5 fra "
-                      f"{len(d['votes'])} vurderinger ({len(d['texts'])} med tekst)")
-    linjer += ["", "## Guider", "",
-               f"- [Beste arbeidsbukse for damer, rangert av kundene]({BASE_URL}/{THEME_SLUG}/)",
-               "", "## Full tekst", "",
-               f"- [Alle omtaler i ren tekst]({BASE_URL}/llms-full.txt)"]
+        if nb:
+            linjer.append(f"- [{pp['title']}]({BASE_URL}/{slug}/): {no_num(a)} av 5 fra "
+                          f"{len(d['votes'])} vurderinger ({len(d['texts'])} med tekst)")
+        else:
+            linjer.append(f"- [{pp['title']}]({BASE_URL}/{slug}/): {no_num(a)} av 5 från "
+                          f"{len(d['votes'])} betyg ({len(d['texts'])} med text)")
+    if nb:
+        linjer += ["", "## Guider", "",
+                   f"- [Beste arbeidsbukse for damer, rangert av kundene]({BASE_URL}/{THEME_SLUG}/)",
+                   "", "## Full tekst", "",
+                   f"- [Alle omtaler i ren tekst]({BASE_URL}/llms-full.txt)"]
+    else:
+        linjer += ["", "## Guider", "",
+                   f"- [Bästa arbetsbyxan för dam, rankad av kunderna]({BASE_URL}/{THEME_SLUG_SV}/)",
+                   "", "## Fulltext", "",
+                   f"- [Alla recensioner i ren text]({BASE_URL}/llms-full.txt)"]
     return "\n".join(linjer) + "\n"
 
 
 def build_llms_full(votes, sider, avg):
-    linjer = [f"# {SITE_TITLE} — alle omtaler", "",
-              f"Snitt {no_num(avg)} av 5 fra {len(votes)} verifiserte kjøp via Lipscore. "
-              f"Butikk: {SHOP_URL} (Norge), {SHOP_URL_SE} (Sverige). Driftes av Flor AS, Voss.", ""]
-    rangert = sorted(sider.items(), key=lambda kv: len(kv[1]["votes"]), reverse=True)
+    nb = CUR["lang"] == "nb"
+    svar = "Svar fra Flor" if nb else "Svar från Flor"
+    if nb:
+        linjer = [f"# {SITE_TITLE} — alle omtaler", "",
+                  f"Snitt {no_num(avg)} av 5 fra {len(votes)} verifiserte kjøp via Lipscore. "
+                  f"Butikk: {SHOP_URL} (Norge), {SHOP_URL_SE} (Sverige). Driftes av Flor AS, Voss.", ""]
+    else:
+        linjer = [f"# {SITE_TITLE_SV} — alla recensioner", "",
+                  f"Snitt {no_num(avg)} av 5 från {len(votes)} verifierade köp via Lipscore. Recensionerna "
+                  f"är skrivna på norska. Butik: {SHOP_URL_SE} (Sverige), {SHOP_URL} (Norge). "
+                  f"Drivs av Flor AS, Voss.", ""]
+    rangert = sorted(site_sider(sider), key=lambda t: len(t[2]["votes"]), reverse=True)
     dekket = set()
-    for h, d in rangert:
+    for h, slug, d in rangert:
+        pp = d["p"] if nb else (M_SV["products"] or {}).get(h, d["p"])
+        shop = SHOP_URL if nb else SHOP_URL_SE
         a = sum(r["rating"] for r in d["votes"]) / len(d["votes"])
-        linjer += [f"## {d['p']['title']} — {no_num(a)} av 5 ({len(d['votes'])} vurderinger)",
-                   f"Produktside: {SHOP_URL}/products/{h}", ""]
+        enhet = "vurderinger" if nb else "betyg"
+        linjer += [f"## {pp['title']} — {no_num(a)} av 5 ({len(d['votes'])} {enhet})",
+                   ("Produktside: " if nb else "Produktsida: ") + f"{shop}/products/{h}", ""]
         for r in d["texts"]:
             dekket.add(id(r))
             dato = f", {fmt_date(r['date'])}" if r["date"] else ""
             linjer.append(f"- {no_num(r['rating'], 0)}/5 ({r['name']}{dato}): {r['text']}")
             if r["reply"]:
-                linjer.append(f"  - Svar fra Flor: {r['reply']}")
+                linjer.append(f"  - {svar}: {r['reply']}")
         linjer.append("")
     rest = [r for r in votes if r["text"] and id(r) not in dekket]
     if rest:
-        linjer += ["## Øvrige omtaler (butikk og andre produkter)", ""]
+        linjer += ["## Øvrige omtaler (butikk og andre produkter)" if nb
+                   else "## Övriga recensioner (butiken och andra produkter)", ""]
         for r in rest:
             dato = f", {fmt_date(r['date'])}" if r["date"] else ""
-            hva = "butikken" if is_service(r) else (r["product"] or "produkt")
-            linjer.append(f"- {no_num(r['rating'], 0)}/5 om {hva} ({r['name']}{dato}): {r['text']}")
+            hva = ("butikken" if nb else "butiken") if is_service(r) else (r["product"] or "produkt")
+            om = "om" if nb else "om"
+            linjer.append(f"- {no_num(r['rating'], 0)}/5 {om} {hva} ({r['name']}{dato}): {r['text']}")
             if r["reply"]:
-                linjer.append(f"  - Svar fra Flor: {r['reply']}")
+                linjer.append(f"  - {svar}: {r['reply']}")
         linjer.append("")
-    linjer += ["## Ofte stilte spørsmål", ""]
-    for q, a in L_NB["faq"]:
+    linjer += [CUR["faq_h2"] and f"## {CUR['faq_h2']}", ""]
+    for q, a in CUR["faq"]:
         linjer += [f"### {q}", a, ""]
     return "\n".join(linjer) + "\n"
 
 
 # ---- hovedløp ----------------------------------------------------------------
 
-def build():
-    votes, sample = load_reviews()
-    by_handle, by_title = load_products()
-    sider = product_pages_data(votes, by_handle)
-    avg = sum(r["rating"] for r in votes) / len(votes) if votes else 0
+def build_site(L, votes, by_handle, by_title, sider, sample, avg):
+    """Bygger ett komplett nettsted: forside, produktsider, temaside, sitemap, robots, llms."""
+    set_site(L)
+    nb = L["lang"] == "nb"
+    mine = site_sider(sider)
 
     # rydd gamle undermapper så nedlagte sider ikke blir liggende
     if os.path.isdir(DOCS):
@@ -1103,22 +1294,20 @@ def build():
     os.makedirs(os.path.join(DOCS, "assets"), exist_ok=True)
 
     with open(os.path.join(DOCS, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_index(votes, by_handle, by_title, sider, sample, L_NB))
-    os.makedirs(os.path.join(DOCS, "se"), exist_ok=True)
-    with open(os.path.join(DOCS, "se", "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_index(votes, by_handle, by_title, sider, sample, L_SV))
-    for h, d in sider.items():
-        os.makedirs(os.path.join(DOCS, d["slug"]), exist_ok=True)
-        with open(os.path.join(DOCS, d["slug"], "index.html"), "w", encoding="utf-8") as f:
-            f.write(build_product_page(h, d, sample))
-    tema = build_theme_page(sider, sample)
+        f.write(build_index(votes, by_handle, by_title, sider, sample, L))
+    for h, slug, d in mine:
+        os.makedirs(os.path.join(DOCS, slug), exist_ok=True)
+        with open(os.path.join(DOCS, slug, "index.html"), "w", encoding="utf-8") as f:
+            f.write(build_product_page(h, d, sample, L))
+    set_site(L)                      # build_* setter språk selv, sett tilbake før resten
+    tema = build_theme_page(sider, sample, L)
+    set_site(L)
     if tema:
-        os.makedirs(os.path.join(DOCS, THEME_SLUG), exist_ok=True)
-        with open(os.path.join(DOCS, THEME_SLUG, "index.html"), "w", encoding="utf-8") as f:
+        os.makedirs(os.path.join(DOCS, CUR["t_slug"]), exist_ok=True)
+        with open(os.path.join(DOCS, CUR["t_slug"], "index.html"), "w", encoding="utf-8") as f:
             f.write(tema)
 
-    set_lang(L_NB)
-    paths = ["", "se/"] + (([f"{THEME_SLUG}/"]) if tema else []) + sorted(f"{d['slug']}/" for d in sider.values())
+    paths = [""] + ([f"{CUR['t_slug']}/"] if tema else []) + sorted(f"{sl}/" for _, sl, _ in mine)
     with open(os.path.join(DOCS, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(build_sitemap(paths))
     with open(os.path.join(DOCS, "robots.txt"), "w", encoding="utf-8") as f:
@@ -1137,13 +1326,27 @@ def build():
     shutil.copy(os.path.join(BASE, "src", "favicon.svg"), os.path.join(DOCS, "favicon.svg"))
     open(os.path.join(DOCS, ".nojekyll"), "w").close()
 
+    navn = "floromtaler.no (nb)" if nb else "florrecensioner.se (sv)"
+    print(f"  {navn}: forside + {len(mine)} produktsider + "
+          f"{'temaside' if tema else 'ingen temaside'} — {len(paths)} URL-er i sitemap")
+    return len(mine), bool(tema)
+
+
+def build():
+    votes, sample = load_reviews()
+    by_handle, by_title = load_products()
+    sider = product_pages_data(votes, by_handle)
+    avg = sum(r["rating"] for r in votes) / len(votes) if votes else 0
     n_cards = sum(1 for r in votes if r["text"])
     mode = "SAMPLE (forhåndsvisning)" if sample else "PRODUKSJON"
-    print(f"OK: forside (nb+sv) + {len(sider)} produktsider + {'temaside' if tema else 'ingen temaside'} — "
-          f"{len(votes)} vurderinger ({n_cards} med tekst), snitt {no_num(avg)}/5, modus: {mode}")
-    print(f"    sitemap.xml ({len(paths)} URL-er), robots.txt, IndexNow-nøkkel {key[:8]}…"
-          + (", llms.txt, llms-full.txt" if not sample else " (llms-filer hoppes over i sample-modus)"))
 
+    print(f"OK: {len(votes)} vurderinger ({n_cards} med tekst), snitt {no_num(avg)}/5, modus: {mode}")
+    for L in (L_NB, L_SV):
+        build_site(L, votes, by_handle, by_title, sider, sample, avg)
+    uten_se = [d["p"]["title"] for d in sider.values() if not d.get("slug_sv")]
+    if uten_se:
+        print(f"  ({len(uten_se)} produkt(er) utelatt fra svensk side, selges ikke på florworks.se: "
+              + ", ".join(sorted(uten_se)) + ")")
 
 if __name__ == "__main__":
     build()
